@@ -1,53 +1,83 @@
-@import "tailwindcss";
+@tailwind utilities;
 
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Satoshi Font */
+@font-face {
+  font-family: 'Satoshi'; /* Nome único para a família */
+  src: url('./fonts/Satoshi/Satoshi-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: 'Satoshi'; /* Mesmo nome para diferentes pesos */
+  src: url('./fonts/Satoshi/Satoshi-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal; /* 'regular' não é válido, use 'normal' */
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+/* IntegralCF Font */
+@font-face {
+  font-family: 'IntegralCF'; /* Nome único para a família */
+  src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-medium.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
+@font-face {
+  font-family: 'IntegralCF';
+  src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal; /* 'bold' não é válido para font-style */
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@font-face {
+  font-family: 'IntegralCF';
+  src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Configuração do tema */
+@theme {
+  --font-family-satoshi: "Satoshi", sans-serif;
+  --font-family-satoshi-medium: "Satoshi", sans-serif;
+  --font-family-satoshi-regular: "Satoshi", sans-serif;
+  --font-family-integral: "IntegralCF", sans-serif;
+  --font-family-integral-medium: "IntegralCF", sans-serif;
+  --font-family-integral-bold: "IntegralCF", sans-serif;
+  --font-family-integral-regular: "IntegralCF", sans-serif;
 }
 
-.imgDark {
-  display: none;
+/* Classes utilitárias */
+.font-satoshi {
+  font-family: var(--font-family-satoshi);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.font-satoshi-medium {
+  font-family: var(--font-family-satoshi-medium);
+  font-weight: 500;
+}
 
-  .imgLight {
-    display: none;
-  }
-  .imgDark {
-    display: unset;
-  }
+.font-satoshi-regular {
+  font-family: var(--font-family-satoshi-regular);
+  font-weight: 400;
+}
+
+.font-integral {
+  font-family: var(--font-family-integral);
+}
+
+.font-integral-medium {
+  font-family: var(--font-family-integral-medium);
+  font-weight: 700;
+}
+
+.font-integral-bold {
+  font-family: var(--font-family-integral-bold);
+  font-weight: 800;
+}
+
+.font-integral-regular {
+  font-family: var(--font-family-integral-regular);
+  font-weight: 400;
 }

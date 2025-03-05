@@ -5,7 +5,11 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@public/*": ["./public/*"]
+    }
   },
   "include": [
     "**/*.ts",
