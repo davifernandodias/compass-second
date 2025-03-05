@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 
 @font-face {
@@ -44,13 +44,13 @@
 
 @theme {
 
-  --font-family-satoshi: "Satoshi", sans-serif;
-  --font-family-satoshi-medium: "Satoshi", sans-serif;
-  --font-family-satoshi-regular: "Satoshi", sans-serif;
-  --font-family-integral: "IntegralCF", sans-serif;
-  --font-family-integral-medium: "IntegralCF", sans-serif;
-  --font-family-integral-bold: "IntegralCF", sans-serif;
-  --font-family-integral-regular: "IntegralCF", sans-serif;
+  --font-family-satoshi: 'Satoshi', sans-serif;
+  --font-family-satoshi-medium: 'Satoshi', sans-serif;
+  --font-family-satoshi-regular: 'Satoshi', sans-serif;
+  --font-family-integral: 'IntegralCF', sans-serif;
+  --font-family-integral-medium: 'IntegralCF', sans-serif;
+  --font-family-integral-bold: 'IntegralCF', sans-serif;
+  --font-family-integral-regular: 'IntegralCF', sans-serif;
 
   /* Colors */
   --color-gray-primary: var(--gray-primary);
