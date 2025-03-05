@@ -6,6 +6,7 @@ interface ButtonProps {
   children?: ReactNode;
   className?: string;
   appName?: string;
+  type?:string,
 }
 
 export const Button = ({ children, className, appName }: ButtonProps) => {

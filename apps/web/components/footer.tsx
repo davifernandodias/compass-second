@@ -4,6 +4,7 @@ import {
   IconCardPaypal, IconCardVisa, IconFacebook, IconGithub,
   IconInstagram, IconTwitter
 } from '@public/svg/footer/index';
+import Newsletter from './newsletter';
 
 
 const COMPANY_LINKS = [
@@ -45,10 +46,10 @@ const SOCIAL_LINKS = [
 function FooterLinkGroup({ title, links }: FooterLinkGroupProps) {
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-black font-family-satoshi-medium text-sm tracking-widest">{title}</p>
+      <p className="text-black font-satoshi-medium text-sm tracking-widest">{title}</p>
       <div className="flex flex-col gap-3 text-gray-text text-sm">
-        {links.map((link) => (
-          <a key={link.label} href={link.href} className="hover:text-gray-900 font-family-satoshi-regular transition-colors">
+        {links.map((link, index) => (
+          <a key={`${link.label}-${link.href}-${index}`} href={link.href} className="text-gray-text hover:text-gray-900 font-satoshi-regular transition-colors">
             {link.label}
           </a>
         ))}
@@ -59,8 +60,9 @@ function FooterLinkGroup({ title, links }: FooterLinkGroupProps) {
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-50">
-      <div className="container mx-auto">
+    <footer>
+      <Newsletter />
+      <div className="container mx-auto ">
         <div className="lg:flex lg:py-16 ">
           <div className="p-4 lg:w-[40%]">
             <div className="flex flex-col gap-4">
@@ -70,9 +72,9 @@ export default function Footer() {
                 wear. From women to men.`}
               </p>
               <div className="flex gap-4">
-                {SOCIAL_LINKS.map(({ Icon, href, bgColor }) => (
+                {SOCIAL_LINKS.map(({ Icon, href, bgColor }, index) => (
                   <a
-                    key={href}
+                    key={`${href}-${index}`} 
                     href={href}
                     className={`${bgColor} p-2 rounded-2xl border border-gray-200 hover:scale-110 transition-transform`}
                   >
@@ -83,7 +85,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="lg:flex lg:w-full lg:gap-32  ">
+          <div className="lg:flex lg:w-full">
             <div className="flex gap-32 w-full p-4 lg:gap-32">
               <FooterLinkGroup title="COMPANY" links={COMPANY_LINKS} />
               <FooterLinkGroup title="HELP" links={HELP_LINKS} />
@@ -102,11 +104,11 @@ export default function Footer() {
               Shop.co © 2000-2023, All Rights Reserved
             </p>
             <div className="flex items-center gap-2">
-            <IconCardVisa className=""/>
-            <IconCardMaster className=""/>
-            <IconCardPaypal className=""/>
-            <IconCardApple className=""/>
-            <IconCardGooglePlay className=""/>
+              <IconCardVisa className=""/>
+              <IconCardMaster className=""/>
+              <IconCardPaypal className=""/>
+              <IconCardApple className=""/>
+              <IconCardGooglePlay className=""/>
             </div>
           </div>
         </div>

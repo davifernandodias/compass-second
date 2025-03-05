@@ -69,6 +69,11 @@
 }
 
 /* Classes utilitárias */
+
+body {
+  background-color: var(--gray-primary);
+}
+
 .font-satoshi {
   font-family: var(--font-family-satoshi);
 }
@@ -100,4 +105,8 @@
 .font-integral-regular {
   font-family: var(--font-family-integral-regular);
   font-weight: 400;
+}
+
+.linear-bg {
+  background: linear-gradient(to bottom, white 50%, var(--gray-primary) 50%);
 }

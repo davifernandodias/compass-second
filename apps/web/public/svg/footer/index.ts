@@ -7,10 +7,11 @@ import IconFacebook from '@public/svg/footer/icon-facebook';
 import IconGithub from '@public/svg/footer/icon-github';
 import IconInstagram from '@public/svg/footer/icon-instagram';
 import IconTwitter from '@public/svg/footer/icon-twitter';
+import IconMessageNewsletter from './icon-message-newsletter';
 
 
 export { 
   IconCardApple,  IconCardGooglePlay, IconCardMaster,
   IconCardPaypal, IconCardVisa, IconFacebook, IconGithub, IconInstagram,
-  IconTwitter
+  IconTwitter, IconMessageNewsletter
 }

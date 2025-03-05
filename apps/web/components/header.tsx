@@ -8,7 +8,7 @@ import Input from "@repo/ui/input";
 
 export default function Header() {
   return (
-    <header className="w-full">
+    <header className="w-full bg-white">
       <nav className="relative flex justify-center items-center py-3 bg-black text-white font-satoshi-regular text-sm lg:text-base">
         <p className="md:text-nowrap text-center max-w-[300px] px-4 lg:px-0">
           Sign up and get 20% off to your first order.{" "}
@@ -36,15 +36,9 @@ export default function Header() {
 
           <div className="hidden lg:flex items-center space-x-8 font-satoshi-regular text-gray-text ">
             <Button className="hover:text-black transition-colors">Shop</Button>
-            <Button className="hover:text-black transition-colors">
-              On Sale
-            </Button>
-            <Button className="hover:text-black transition-colors">
-              New Arrivals
-            </Button>
-            <Button className="hover:text-black transition-colors">
-              Brands
-            </Button>
+            <Button className="hover:text-black transition-colors">On Sale</Button>
+            <Button className="hover:text-black transition-colors">New Arrivals</Button>
+            <Button className="hover:text-black transition-colors">Brands</Button>
           </div>
         </div>
 
