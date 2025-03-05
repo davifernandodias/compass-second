@@ -41,6 +41,7 @@
 :root {
   --gray-primary: #f2f0f1;
   --gray-secundary: #f0f0f0;
+  --gray-border: #bfbfbf;
   --gray-text: #616060;
 }
 
@@ -57,10 +58,12 @@
   --color-gray-primary: var(--gray-primary);
   --color-gray-secundary: var(--gray-secundary);
   --color-gray-text: var(--gray-text);
+  --color-gray-border: var(--gray-border);
 
   --text-12: 12px;
   --text-14: 14px;
 
+  --w-73: 73px;
   --w-300: 300px;
 }
 

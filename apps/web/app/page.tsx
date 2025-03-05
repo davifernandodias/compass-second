@@ -3,7 +3,7 @@
 
 export default function Home() {
   return (
-    <div className='bg-gray-primary'>
+    <div className='bg-red-500'>
       <h1 className='font-satoshi text-2xl'>
         Satoshi (usa o peso padrão disponível)
       </h1>
