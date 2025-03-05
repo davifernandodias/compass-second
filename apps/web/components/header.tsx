@@ -1,8 +1,8 @@
-import IconNavtop from "@public/svg/header/icon-exit-nav-bar-top";
-import IconProfile from "@public/svg/header/icon-profile";
-import IconSearch from "@public/svg/header/icon-search";
-import IconShopCar from "@public/svg/header/icon-shop-car";
-import IconSidebar from "@public/svg/header/icon-sidebar";
+import {
+  IconNavtop, IconProfile, IconSearch,
+  IconShopCar, IconSidebar
+} from "@public/svg/header/index";
+
 import { Button } from "@repo/ui/button";
 import Input from "@repo/ui/input";
 

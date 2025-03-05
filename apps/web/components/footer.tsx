@@ -1,101 +1,113 @@
-import IconCardApple from "@public/svg/footer/icon-card-apple";
-import IconCardGooglePlay from "@public/svg/footer/icon-card-google-play";
-import IconCardMaster from "@public/svg/footer/icon-card-master";
-import IconCardPaypal from "@public/svg/footer/icon-card-paypal";
-import IconCardVisa from "@public/svg/footer/icon-card-visa";
-import IconFacebook from "@public/svg/footer/icon-facebook";
-import IconGithub from "@public/svg/footer/icon-github";
-import IconInstagram from "@public/svg/footer/icon-instagram";
-import IconTwitter from "@public/svg/footer/icon-twitter";
+import FooterLinkGroupProps from '@interfaces/footer-link-groups-interfaces';
+import {
+  IconCardApple, IconCardGooglePlay, IconCardMaster,
+  IconCardPaypal, IconCardVisa, IconFacebook, IconGithub,
+  IconInstagram, IconTwitter
+} from '@public/svg/footer/index';
+
+
+const COMPANY_LINKS = [
+  { label: 'About', href: '#' },
+  { label: 'Features', href: '#' },
+  { label: 'Works', href: '#' },
+  { label: 'Career', href: '#' },
+];
+
+const HELP_LINKS = [
+  { label: 'Customer Support', href: '#' },
+  { label: 'Delivery Details', href: '#' },
+  { label: 'Terms & Conditions', href: '#' },
+  { label: 'Privacy Policy', href: '#' },
+];
+
+const FAQ_LINKS = [
+  { label: 'Account', href: '#' },
+  { label: 'Manage Deliveries', href: '#' },
+  { label: 'Orders', href: '#' },
+  { label: 'Payment', href: '#' },
+];
+
+const RESOURCE_LINKS = [
+  { label: 'Free eBook', href: '#' },
+  { label: 'Development Tutorial', href: '#' },
+  { label: 'How to - Blog', href: '#' },
+  { label: 'Youtube Playlist', href: '#' },
+];
+
+const SOCIAL_LINKS = [
+  { Icon: IconTwitter, href: '#', bgColor: 'bg-white' },
+  { Icon: IconFacebook, href: '#', bgColor: 'bg-black' },
+  { Icon: IconInstagram, href: '#', bgColor: 'bg-white' },
+  { Icon: IconGithub, href: '#', bgColor: 'bg-white' },
+];
+
+
+function FooterLinkGroup({ title, links }: FooterLinkGroupProps) {
+  return (
+    <div className="flex flex-col gap-2">
+      <p className="text-black font-family-satoshi-medium text-sm tracking-widest">{title}</p>
+      <div className="flex flex-col gap-3 text-gray-text text-sm">
+        {links.map((link) => (
+          <a key={link.label} href={link.href} className="hover:text-gray-900 font-family-satoshi-regular transition-colors">
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer>
-      <div>
-        <div className="bg-gray-primary p-4">
-          <div className="flex flex-col gap-4">
-            <h1 className="font-integral-bold text-3xl">SHOP.CO</h1>
-            <p className="text-gray-text font-satoshi-regular text-14">
-              We have clothes that suits your style and which you’re proud to
-              wear. From women to men.
-            </p>
-            <div className="flex gap-4">
-              <div className="bg-white p-2 rounded-2xl border-gray-border border">
-                <IconTwitter className="w-4 h-4" />
-              </div>
-              <div className="bg-black p-2 rounded-2xl border-black border">
-                <IconFacebook className="w-4 h-4 " />
-              </div>
-              <div className="bg-white p-2 rounded-2xl border-gray-border border">
-                <IconInstagram className="w-4 h-4" />
-              </div>
-              <div className="bg-white p-2 rounded-2xl border-gray-border border">
-                <IconGithub className="w-4 h-4" />
+    <footer className="bg-gray-50">
+      <div className="container mx-auto">
+        <div className="lg:flex lg:py-16 ">
+          <div className="p-4 lg:w-[40%]">
+            <div className="flex flex-col gap-4">
+              <h1 className="font-bold font-family-integral-bold text-3xl lg:text-4xl">SHOP.CO</h1>
+              <p className="text-gray-600 text-sm w-64">{`
+                We have clothes that suits your style and which you're proud to
+                wear. From women to men.`}
+              </p>
+              <div className="flex gap-4">
+                {SOCIAL_LINKS.map(({ Icon, href, bgColor }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    className={`${bgColor} p-2 rounded-2xl border border-gray-200 hover:scale-110 transition-transform`}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex gap-32 bg-gray-primary p-4">
-          <div className="flex flex-col gap-2">
-            <p className="text-black font-satoshi-medium text-14 tracking-widest">
-              COMPANY
-            </p>
-            <div className="flex flex-col gap-3 text-gray-text font-satoshi-regular text-14">
-              <p>About</p>
-              <p>Features</p>
-              <p>Works</p>
-              <p>Career</p>
+
+          <div className="lg:flex lg:w-full lg:gap-32  ">
+            <div className="flex gap-32 w-full p-4 lg:gap-32">
+              <FooterLinkGroup title="COMPANY" links={COMPANY_LINKS} />
+              <FooterLinkGroup title="HELP" links={HELP_LINKS} />
             </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <p className="text-black font-satoshi-medium text-14 tracking-widest">
-              HELP
-            </p>
-            <div className="flex flex-col gap-3 text-gray-text font-satoshi-regular text-14">
-              <p>Customer Support</p>
-              <p>Delivery Details</p>
-              <p>Terms & Conditions</p>
-              <p>Privacy Policy</p>
+            <div className="flex gap-24 w-full p-4 lg:gap-32">
+              <FooterLinkGroup title="FAQ" links={FAQ_LINKS} />
+              <FooterLinkGroup title="RESOURCES" links={RESOURCE_LINKS} />
             </div>
           </div>
         </div>
 
-        <div className="flex gap-24 bg-gray-primary p-4">
-          <div className="flex flex-col gap-2">
-            <p className="text-black font-satoshi-medium text-14 tracking-widest">
-              FAQ
+        <div className="flex flex-col justify-center items-center gap-4 pt-4">
+          <hr className="border-t border-gray-200 w-[98%]" />
+          <div className="flex flex-col items-center justify-center gap-4 lg:flex-row lg:justify-between lg:px-3 w-full pb-8">
+            <p className="text-gray-600 text-sm">
+              Shop.co © 2000-2023, All Rights Reserved
             </p>
-            <div className="flex flex-col gap-3 text-gray-text font-satoshi-regular text-14">
-              <p>Account</p>
-              <p>Manage Deliveries</p>
-              <p>Orders</p>
-              <p>Payment</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <p className="text-black font-satoshi-medium text-14 tracking-widest">
-              RESOURCES
-            </p>
-            <div className="flex flex-col gap-3 text-gray-text font-satoshi-regular text-14">
-              <p>Free eBook</p>
-              <p>Development Tutorial</p>
-              <p>How to - Blog</p>
-              <p>Youtube Playlist</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-center items-center gap-4 bg-gray-primary pt-4">
-          <hr className="border h-0.5 border-gray-500 opacity-15 w-[90vw]" />
-          <div className="pt-2">
-            <p className="font-family-satoshi-regular text-gray-text">{"Shop.co © 2000-2023, All Rights Reserved"}</p>
-          </div>
-          <div className="flex pb-10">
+            <div className="flex items-center gap-2">
             <IconCardVisa className=""/>
             <IconCardMaster className=""/>
             <IconCardPaypal className=""/>
             <IconCardApple className=""/>
             <IconCardGooglePlay className=""/>
+            </div>
           </div>
         </div>
       </div>
