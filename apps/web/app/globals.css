@@ -1,23 +1,22 @@
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Satoshi Font */
+
 @font-face {
-  font-family: 'Satoshi'; /* Nome único para a família */
+  font-family: 'Satoshi'; 
   src: url('./fonts/Satoshi/Satoshi-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Satoshi'; /* Mesmo nome para diferentes pesos */
+  font-family: 'Satoshi'; 
   src: url('./fonts/Satoshi/Satoshi-Regular.otf') format('opentype');
   font-weight: 400;
-  font-style: normal; /* 'regular' não é válido, use 'normal' */
+  font-style: normal; 
 }
 
-/* IntegralCF Font */
 @font-face {
-  font-family: 'IntegralCF'; /* Nome único para a família */
+  font-family: 'IntegralCF'; 
   src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-medium.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
@@ -27,7 +26,7 @@
   font-family: 'IntegralCF';
   src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
   font-weight: 800;
-  font-style: normal; /* 'bold' não é válido para font-style */
+  font-style: normal; 
 }
 
 @font-face {
@@ -37,8 +36,14 @@
   font-style: normal;
 }
 
-/* Configuração do tema */
+:root {
+  --gray-primary: #f2f0f1;
+  --gray-secundary: #f0f0f0;
+  --gray-text: #616060;
+}
+
 @theme {
+
   --font-family-satoshi: "Satoshi", sans-serif;
   --font-family-satoshi-medium: "Satoshi", sans-serif;
   --font-family-satoshi-regular: "Satoshi", sans-serif;
@@ -46,6 +51,17 @@
   --font-family-integral-medium: "IntegralCF", sans-serif;
   --font-family-integral-bold: "IntegralCF", sans-serif;
   --font-family-integral-regular: "IntegralCF", sans-serif;
+
+  /* Colors */
+  --color-gray-primary: var(--gray-primary);
+  --color-gray-secundary: var(--gray-secundary);
+  --color-gray-text: var(--gray-text);
+
+  --text-12: 12px; 
+  --text-14: 14px; 
+
+  --w-300: 300px;
+
 }
 
 /* Classes utilitárias */
