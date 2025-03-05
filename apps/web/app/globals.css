@@ -19,7 +19,7 @@
   font-family: 'IntegralCF'; 
   src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-medium.otf') format('opentype');
   font-weight: 700;
-  font-style: normal;
+  font-style: bold;
 }
 
 @font-face {

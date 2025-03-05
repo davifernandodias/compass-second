@@ -1,10 +1,8 @@
-import ISvg from '@interfaces/svg-interfaces'
+import ISvg from '@interfaces/svg-interfaces';
 
-export default function IconSidebar({ className } : ISvg) {
+export default function IconSidebar({ className }: ISvg) {
   return (
     <svg
-      width='20'
-      height='16'
       viewBox='0 0 20 16'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
