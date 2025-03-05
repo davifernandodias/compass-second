@@ -1,43 +1,50 @@
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Satoshi Font */
 @font-face {
-  font-family: 'Satoshi'; /* Nome único para a família */
-  src: url('./fonts/Satoshi/Satoshi-Medium.otf') format('opentype');
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi/Satoshi-Medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Satoshi'; /* Mesmo nome para diferentes pesos */
-  src: url('./fonts/Satoshi/Satoshi-Regular.otf') format('opentype');
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi/Satoshi-Regular.otf") format("opentype");
   font-weight: 400;
-  font-style: normal; /* 'regular' não é válido, use 'normal' */
+  font-style: normal;
 }
 
-/* IntegralCF Font */
 @font-face {
-  font-family: 'IntegralCF'; /* Nome único para a família */
-  src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-medium.otf') format('opentype');
+  font-family: "IntegralCF";
+  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-medium.otf")
+    format("opentype");
   font-weight: 700;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: "IntegralCF";
+  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-bold.otf")
+    format("opentype");
+  font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'IntegralCF';
-  src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-bold.otf') format('opentype');
-  font-weight: 800;
-  font-style: normal; /* 'bold' não é válido para font-style */
-}
-
-@font-face {
-  font-family: 'IntegralCF';
-  src: url('./fonts/IntegralCF/Fontspring-DEMO-integralcf-regular.otf') format('opentype');
+  font-family: "IntegralCF";
+  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-regular.otf")
+    format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
-/* Configuração do tema */
+:root {
+  --gray-primary: #f2f0f1;
+  --gray-secundary: #f0f0f0;
+  --gray-border: #bfbfbf;
+  --gray-text: #616060;
+}
+
 @theme {
   --font-family-satoshi: "Satoshi", sans-serif;
   --font-family-satoshi-medium: "Satoshi", sans-serif;
@@ -46,9 +53,27 @@
   --font-family-integral-medium: "IntegralCF", sans-serif;
   --font-family-integral-bold: "IntegralCF", sans-serif;
   --font-family-integral-regular: "IntegralCF", sans-serif;
+
+  /* Colors */
+  --color-gray-primary: var(--gray-primary);
+  --color-gray-secundary: var(--gray-secundary);
+  --color-gray-text: var(--gray-text);
+  --color-gray-border: var(--gray-border);
+
+  --text-12: 12px;
+  --text-14: 14px;
+  --text-16: 16px;
+
+  --w-73: 73px;
+  --w-300: 300px;
 }
 
 /* Classes utilitárias */
+
+body {
+  background-color: var(--gray-primary);
+}
+
 .font-satoshi {
   font-family: var(--font-family-satoshi);
 }
@@ -80,4 +105,8 @@
 .font-integral-regular {
   font-family: var(--font-family-integral-regular);
   font-weight: 400;
+}
+
+.linear-bg {
+  background: linear-gradient(to bottom, white 50%, var(--gray-primary) 50%);
 }
