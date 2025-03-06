@@ -1,14 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "strict": true,
-    "verbatimModuleSyntax": true,
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-  }
+  "extends": "@repo/typescript-config/nextjs.json",
+  "include": ["src", "../../env.d.ts"],
+  "exclude": ["node_modules", "build", "dist"]
 }

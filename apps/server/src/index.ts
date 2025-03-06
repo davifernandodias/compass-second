@@ -1,15 +1,17 @@
-import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import { handle } from "hono/vercel";
+import { hc } from "hono/client";
 
-const app = new Hono()
-export const soma = 2
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+import { logger } from "hono/logger";
 
-serve({
-  fetch: app.fetch,
-  port: 3000
-}, (info) => {
-  console.log(`Server is running on http://localhost:${info.port}`)
-})
+const app = new Hono().basePath("/api");
+
+app.use(logger());
+
+const routes = app
+
+type AppType = typeof routes;
+
+const client = hc<AppType>("http://localhost:3000/");
+
+export { app, handle, type AppType, hc, client };
