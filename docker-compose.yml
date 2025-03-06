@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - localdb:/app/node/server
+    environment:
+      - POSTGRES_PASSWORD=davi
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+volumes:
+  localdb:
