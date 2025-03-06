@@ -1,9 +1,16 @@
 // import Image, { type ImageProps } from 'next/image';
 // import { Button } from '@repo/ui/button';
 
+
+import {soma} from "server/src"
+
+
+
 export default function Home() {
   return (
+
     <div className='bg-red-500'>
+      <p>{soma}</p>
       <h1 className='font-satoshi text-2xl'>
         Satoshi (usa o peso padrão disponível)
       </h1>
