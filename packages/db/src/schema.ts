@@ -38,15 +38,17 @@ export const carts = pgTable("carts", {
   product_id: integer("product_id")
     .notNull()
     .references(() => products.id, { onDelete: "cascade", onUpdate: "cascade" }),
+  quantity: integer("quantity").notNull().default(1), 
   created_at: timestamp("created_at", { mode: "date" }).defaultNow(),
 });
+
 
 export const orders = pgTable("orders", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   user_id: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
-  status: varchar("status", { length: 50 }).default("pending"), // pending, paid, shipped, etc.
+  status: varchar("status", { length: 50 }).default("pending"), 
   created_at: timestamp("created_at", { mode: "date" }).defaultNow(),
 });
 
