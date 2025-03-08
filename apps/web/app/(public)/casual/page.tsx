@@ -1,3 +1,4 @@
+import Product from "@components/product";
 import IconCollapse from "@public/svg/clothes/icon-collapse";
 import IconFilterMobile from "@public/svg/clothes/icon-filter-mobile";
 
@@ -10,7 +11,7 @@ export default function CasualPage() {
         <p>Casual</p>
       </nav>
 
-      <div>
+      <div className="flex flex-col gap-12">
         <div className=" flex justify-between items-end">
           <div className="flex gap-2 items-end">
             <h1 className="font-family-satoshi-medium text-2xl font-bold">Casual</h1>
@@ -20,6 +21,7 @@ export default function CasualPage() {
             <IconFilterMobile className="w-10 h-10"/>
           </div>
         </div>
+        <Product />
       </div>
     </section>
   );
