@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @font-face {
   font-family: "Satoshi";
   src: url("./fonts/Satoshi/Satoshi-Medium.otf") format("opentype");
@@ -60,9 +61,11 @@
   --color-gray-text: var(--gray-text);
   --color-gray-border: var(--gray-border);
 
+  --text-10: 10px;
   --text-12: 12px;
   --text-14: 14px;
   --text-16: 16px;
+  --text-20: 20px;
 
   --w-73: 73px;
   --w-300: 300px;
