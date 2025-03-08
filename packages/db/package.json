@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "migration:generate": "npx run drizzle-kit generate",
+    "migration:generate": "npx drizzle-kit generate",
     "push": "npx drizzle-kit push",
     "studio": "npx drizzle-kit studio --verbose",
     "with-env": "dotenv -e ../../.env -c --",
