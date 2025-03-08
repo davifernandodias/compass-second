@@ -26,6 +26,7 @@ export const products = pgTable("products", {
   assessment: doublePrecision("assessment"),
   discount: doublePrecision("discount"),
   image: text("image"),
+  amount: integer().notNull().default(0),
   user_id: text("user_id").references(() => users.id, {
     onDelete: "set null",
     onUpdate: "cascade",

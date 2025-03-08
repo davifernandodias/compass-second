@@ -4,8 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "studio": "npx run with-env npx drizzle-kit studio --verbose",
-    "push": "npx run with-env npx drizzle-kit push",
+    "migration:generate": "npx run drizzle-kit generate",
+    "push": "npx drizzle-kit push",
+    "studio": "npx drizzle-kit studio --verbose",
     "with-env": "dotenv -e ../../.env -c --",
     "seed": "npx run with-env npx --npx run ./src/seed.ts"
   },
