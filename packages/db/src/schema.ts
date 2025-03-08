@@ -4,6 +4,7 @@ import {
   text,
   timestamp,
   varchar,
+  doublePrecision
 } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
@@ -20,10 +21,11 @@ export const users = pgTable("users", {
 export const products = pgTable("products", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   nome: varchar("nome", { length: 255 }).notNull(),
-  price: integer("price").notNull(),
+  price: doublePrecision("price").notNull(),
   color: text("color"),
-  assessment: integer("assessment"),
-  discount: integer("discount"),
+  assessment: doublePrecision("assessment"),
+  discount: doublePrecision("discount"),
+  image: text("image"),
   user_id: text("user_id").references(() => users.id, {
     onDelete: "set null",
     onUpdate: "cascade",

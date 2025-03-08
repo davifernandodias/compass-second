@@ -1,27 +1,23 @@
 {
-  "name": "compass-second",
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "build:web": "turbo run build --filter=web...",
-    "build:server": "turbo run build --filter=server...",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types",
-    "services": "sudo docker compose up -d"
-  },
-  "devDependencies": {
-    "prettier": "^3.5.3",
-    "turbo": "^2.4.4",
-    "typescript": "5.8.2"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "npm@11.1.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": ["POSTGRES_URL"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "POSTGRES_URL"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["POSTGRES_URL"] 
+    }
+  }
 }

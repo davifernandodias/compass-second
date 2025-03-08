@@ -8,7 +8,11 @@ import * as schema from "./schema.js";
 if (!process.env.POSTGRES_URL)
   throw new Error("Missing POSTGRES_URL environment variable!");
 
-const queryClient = postgres(process.env.POSTGRES_URL);
+const queryClient = postgres(process.env.POSTGRES_URL, {
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 async function testConnection() {
   try {

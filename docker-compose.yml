@@ -4,9 +4,9 @@ services:
     volumes:
       - localdb:/app/node/server
     environment:
-      - POSTGRES_PASSWORD=davi
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=davi
+      - POSTGRES_DB=ecommecer
     ports:
       - "5432:5432"
 volumes:
