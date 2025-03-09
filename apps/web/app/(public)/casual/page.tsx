@@ -63,7 +63,7 @@ export default function CasualPage() {
               </div>
             </div>
           </div>
-          <Product />
+          <Product  produto="oi" quantity={[1,2,3,4,5,6,7,8,9]} routeIsActive={true}/>
         </div>
       </div>
     </section>
