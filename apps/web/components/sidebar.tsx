@@ -1,9 +1,9 @@
 import IconCollapse from "@public/svg/clothes/icon-collapse";
 import IconFilterSidebar from "@public/svg/clothes/icon-filter-sidebar";
 import DoubleRange from "./double-range";
+import ColorPicker from "./color-text-box";
 
 export default function Sidebar() {
-
   return (
     <nav className="hidden lg:flex flex-col border border-gray-secundary w-210 h-300 rounded-3xl p-6 gap-6">
       <div className="flex justify-between  items-center">
@@ -41,11 +41,16 @@ export default function Sidebar() {
         <IconCollapse className="w-3 h-3 -rotate-90" />
       </div>
       <div>
-      <DoubleRange 
-          min={0}
-          max={500}
-        />
+        <DoubleRange min={0} max={500} />
       </div>
+      <hr className="border border-gray-secundary  " />
+      <div className="flex flex-col gap-6">
+        <div className="flex bg-amber-200 items-center justify-between">
+          <h1 className="font-family-satoshi-medium font-bold text-20">Colors</h1>
+          <IconCollapse className="w-3 h-3 -rotate-90" />
+        </div> 
+        <ColorPicker />
+        </div>
     </nav>
   );
 }
