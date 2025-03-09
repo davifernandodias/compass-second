@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1741340997378,
+      "tag": "0000_fantastic_giant_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1741428795127,
+      "tag": "0001_overrated_ironclad",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1741430885815,
+      "tag": "0002_married_robin_chapel",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1741434406551,
+      "tag": "0003_needy_leopardon",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1741455866019,
+      "tag": "0004_curved_luke_cage",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1741456468954,
+      "tag": "0005_tidy_black_tarantula",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1741456527735,
+      "tag": "0006_tiresome_thaddeus_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1741457049774,
+      "tag": "0007_fluffy_zombie",
+      "breakpoints": true
+    }
+  ]
+}

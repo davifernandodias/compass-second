@@ -4,15 +4,17 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "studio": "npx run with-env bunx drizzle-kit studio --verbose",
-    "push": "npx run with-env bunx drizzle-kit push",
+    "migration:generate": "npx drizzle-kit generate",
+    "push": "npx drizzle-kit push",
+    "studio": "npx drizzle-kit studio --verbose",
     "with-env": "dotenv -e ../../.env -c --",
-    "seed": "npx run with-env bunx --bun run ./src/seed.ts"
+    "seed": "npx run with-env npx --npx run ./src/seed.ts"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
-    "@types/pg": "^8.11.10"
+    "@types/pg": "^8.11.11",
+    "drizzle-kit": "^0.30.5"
   },
   "peerDependencies": {
     "typescript": "^5.7.2"
@@ -21,10 +23,9 @@
     "@faker-js/faker": "^9.3.0",
     "@neondatabase/serverless": "^0.10.4",
     "dotenv-cli": "^8.0.0",
-    "drizzle-kit": "^0.19.1",
-    "drizzle-orm": "^0.38.3",
+    "drizzle-orm": "^0.38.4",
     "drizzle-zod": "^0.6.1",
-    "pg": "^8.13.1",
+    "pg": "^8.13.3",
     "postgres": "^3.4.5"
   },
   "exports": {

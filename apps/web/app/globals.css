@@ -16,26 +16,36 @@
 
 @font-face {
   font-family: "IntegralCF";
-  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-medium.otf")
-    format("opentype");
+  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-medium.otf") format("opentype");
   font-weight: 700;
   font-style: bold;
 }
 
 @font-face {
   font-family: "IntegralCF";
-  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-bold.otf")
-    format("opentype");
+  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-bold.otf") format("opentype");
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
   font-family: "IntegralCF";
-  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-regular.otf")
-    format("opentype");
+  src: url("./fonts/IntegralCF/Fontspring-DEMO-integralcf-regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
 }
 
 :root {
@@ -60,12 +70,11 @@
   --color-gray-text: var(--gray-text);
   --color-gray-border: var(--gray-border);
 
+  --text-10: 10px;
   --text-12: 12px;
   --text-14: 14px;
   --text-16: 16px;
-
-  --w-73: 73px;
-  --w-300: 300px;
+  --text-20: 20px;
 }
 
 /* Classes utilitárias */
@@ -109,4 +118,21 @@ body {
 
 .linear-bg {
   background: linear-gradient(to bottom, white 50%, var(--gray-primary) 50%);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

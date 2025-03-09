@@ -15,11 +15,18 @@ node_modules
 # Testing
 coverage
 
+
+# Migrations
+drizzle
+.drizzle
+
 # Turbo
 .turbo
 
 # Vercel
 .vercel
+
+
 
 # Build Outputs
 .next/

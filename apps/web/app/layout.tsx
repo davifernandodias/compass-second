@@ -5,9 +5,17 @@ import Footer from '@components/footer';
 
 
 export const metadata: Metadata = {
-  title: 'Ecommecer compass uol',
+  title: 'SHOP.CO',
   description: 'Challenger compasser',
+  keywords: 'e-commerce, shop, online store, produtos, vendas', 
+  robots: 'index, follow', 
+  openGraph: {
+    title: 'SHOP.CO | Loja Online de Produtos',
+    description: 'Encontre os melhores produtos no SHOP.CO, com envio rápido e seguro.',
+    type: 'website',
+  }
 };
+
 
 export default function RootLayout({
   children,
@@ -17,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
+        
         <Header />
         {children}
         <Footer />
