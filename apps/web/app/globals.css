@@ -120,3 +120,19 @@ body {
   background: linear-gradient(to bottom, white 50%, var(--gray-primary) 50%);
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
