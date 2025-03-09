@@ -8,7 +8,7 @@ const a : number[]= [1, 2, 3, 4, 5, 6, 7, 8, 9]
 export default function Product() {
   return (
     <div>
-      <div className="flex gap-2 flex-wrap lg:gap-4 bg-green-200">
+      <div className="flex gap-2 flex-wrap lg:gap-4 bg-green-200 justify-around">
         { a.map((e) => (
               <Card key={e}>
               <div className="flex flex-col gap-3 bg-white ">
