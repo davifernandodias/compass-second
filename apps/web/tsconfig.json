@@ -10,6 +10,7 @@
       "@components/*": ["./components/*"],
       "@public/*": ["./public/*"],
       "@interfaces/*": ["./interfaces/*"],
+      "@hooks/*": ["./hooks/*"]
     }
   },
   "include": [
@@ -17,9 +18,9 @@
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../../packages/ui/src/input-range-sideber.tsx",
+    "../../packages/ui/src/previous-next-product.tsx"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
