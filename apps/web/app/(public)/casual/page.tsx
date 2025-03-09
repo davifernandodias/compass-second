@@ -17,7 +17,7 @@ export default function CasualPage() {
 
       <div className="flex flex-col gap-12">
         <div className=" flex justify-between items-end">
-          <div className="flex gap-2 items-end lg:justify-between bg-red-300 w-full">
+          <div className="flex gap-2 items-end lg:justify-between w-full">
             <h1 className="font-family-satoshi-medium text-2xl font-bold">Casual</h1>
             <p className="text-gray-text font-family-satoshi-regular">Showing 1-10 of 100 Products</p>
           </div>
