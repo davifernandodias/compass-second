@@ -24,8 +24,8 @@ interface ProdutosProps {
 const Product = ({ produto, routeIsActive }: ProdutosProps) => {
   // Componente Product
   return (
-    <div>
-      <div className="flex gap-2 flex-wrap lg:gap-4 justify-around">
+    <div className="flex flex-col gap-6 items-center">
+      <div className="flex gap-2 flex-wrap lg:gap-4 justify-center">
         {produto.map((e) => (
           <Card key={e.id}>
             <div className="flex flex-col gap-3 bg-white ">

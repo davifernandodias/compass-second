@@ -14,18 +14,11 @@ const CasualPage = async () => {
         <IconCollapse className="w-3.5 h-3 mt-0.5" />
         <p>Casual</p>
       </nav>
-      <div className="flex flex-col bg-yellow-50">
+      <div className="flex  bg-yellow-50">
 
       <SidebarContent />
-      <div className="flex  gap-2 items-end lg:justify-between w-full">
-            <h1 className="font-family-satoshi-medium text-2xl font-bold">
-              Casual
-            </h1>
-            <p className="text-gray-text font-family-satoshi-regular">
-              Showing 1-10 of 100 Products
-            </p>
-          </div>
-      <Product produto={product}/>
+      
+      <Product produto={product} />
       </div>
     </section>
   );
