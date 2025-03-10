@@ -13,13 +13,12 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onchange }: SidebarProps) {
   return (
-    <div className="relative">
-      {/* Overlay for mobile when sidebar is open */}
+    <div className="relative ">
       <div
         className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ease-in-out lg:hidden ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
-        onClick={onchange} // Close sidebar when clicking overlay
+        onClick={onchange}
       ></div>
 
       <nav
@@ -30,8 +29,6 @@ export default function Sidebar({ isOpen, onchange }: SidebarProps) {
           lg:border lg:border-gray-secundary lg:translate-0
           ${isOpen ? "translate-x-0 " : " translate-y-full lg:-translate-x-full"} lg:translate-x-0`}
       >
-
-
         <div className="flex justify-between items-center">
           <h1 className="font-family-satoshi-medium font-bold text-20">
             Filters
@@ -67,7 +64,9 @@ export default function Sidebar({ isOpen, onchange }: SidebarProps) {
           </div>
           <hr className="border border-gray-secundary" />
           <div className="flex justify-between items-center">
-            <h1 className="font-family-satoshi-medium font-bold text-20">Price</h1>
+            <h1 className="font-family-satoshi-medium font-bold text-20">
+              Price
+            </h1>
             <IconCollapse className="w-3 h-3 -rotate-90" />
           </div>
           <div>
@@ -86,7 +85,9 @@ export default function Sidebar({ isOpen, onchange }: SidebarProps) {
           <hr className="border border-gray-secundary" />
           <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between">
-              <h1 className="font-family-satoshi-medium font-bold text-20">Size</h1>
+              <h1 className="font-family-satoshi-medium font-bold text-20">
+                Size
+              </h1>
               <IconCollapse className="w-3 h-3 -rotate-90" />
             </div>
             <SizeSelector />

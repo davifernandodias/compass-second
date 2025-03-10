@@ -38,11 +38,12 @@ productRoutes.post("/products", async (req: Request, res: Response) => {
 });
 
 productRoutes.get("/products", async (req: Request, res: Response) => {
+  
   try {
     const initial = parseInt(req.query.initial as string) || 0;
-    const final = parseInt(req.query.final as string) || 10;
+    const limit = parseInt(req.query.final as string) || 10; 
 
-    if (initial < 0 || final <= initial) {
+    if (initial < 0 || limit <= 0) {
       return res.status(400).json({ error: "Parâmetros de paginação inválidos" });
     }
 
@@ -50,7 +51,7 @@ productRoutes.get("/products", async (req: Request, res: Response) => {
       .select()
       .from(products)
       .offset(initial)
-      .limit(final - initial);
+      .limit(limit); 
 
     return res.status(200).json(productsList);
   } catch (error) {
@@ -58,6 +59,7 @@ productRoutes.get("/products", async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Erro ao buscar produtos" });
   }
 });
+
 
 
 productRoutes.get("/products/:id", async (req: Request, res: Response) => {
