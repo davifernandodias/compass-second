@@ -2,9 +2,9 @@ import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
 import userRoutes from "./routes/users";
 import productRoutes from "./routes/products";
-// import orderRoutes from "./routes/orders";
-import { errorHandler } from "./utils";
 import cartRoutes from "./routes/cart";
+import { errorHandler } from "./utils";
+import { db } from "@repo/db/client"; 
 
 const app = express();
 
@@ -13,7 +13,6 @@ app.use(express.json());
 app.use("/api", userRoutes);
 app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
-// app.use("/api", orderRoutes);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   errorHandler.handle(err, res);
@@ -37,3 +36,6 @@ process.on("uncaughtException", (error) => {
     process.exit(1);
   });
 });
+
+// Exporte tanto o server quanto o db
+export { server, db };

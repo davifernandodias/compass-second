@@ -1,32 +1,36 @@
 import { Request, Response, Router } from "express";
 import { db } from "@repo/db/client";
 import { products } from "@repo/db/schema";
-import { insertProductSchema, selectProductSchema } from "@repo/db/schema";
-import { eq } from "drizzle-orm"; 
+import { insertProductSchema } from "@repo/db/schema"; 
+import { eq } from "drizzle-orm";
 
 const productRoutes = Router();
 
 productRoutes.post("/products", async (req: Request, res: Response) => {
   try {
-    const { nome, price, color, assessment, discount, user_id } = req.body;
+    const { nome, price, discount, image, type, description, assessment, user_id } = req.body;
 
-    const parsed = insertProductSchema.safeParse({ nome, price, color, assessment, discount, user_id });
-    if (!parsed.success) {
-      return res.status(400).json({ error: parsed.error.format() });
+    const productData = insertProductSchema.safeParse({
+      nome,
+      price,
+      discount,
+      image,
+      type,
+      description,
+      assessment,
+      user_id,
+    });
+
+    if (!productData.success) {
+      return res.status(400).json({ error: productData.error.format() });
     }
 
-    const result = await db
+    const [newProduct] = await db
       .insert(products)
-      .values({
-        nome,
-        price,
-        color,
-        assessment,
-        discount,
-        user_id,
-      });
+      .values(productData.data)
+      .returning();
 
-    return res.status(201).json(result);
+    return res.status(201).json(newProduct);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao salvar produto" });
@@ -35,13 +39,26 @@ productRoutes.post("/products", async (req: Request, res: Response) => {
 
 productRoutes.get("/products", async (req: Request, res: Response) => {
   try {
-    const productsList = await db.select().from(products);
+    const initial = parseInt(req.query.initial as string) || 0;
+    const final = parseInt(req.query.final as string) || 10;
+
+    if (initial < 0 || final <= initial) {
+      return res.status(400).json({ error: "Parâmetros de paginação inválidos" });
+    }
+
+    const productsList = await db
+      .select()
+      .from(products)
+      .offset(initial)
+      .limit(final - initial);
+
     return res.status(200).json(productsList);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao buscar produtos" });
   }
 });
+
 
 productRoutes.get("/products/:id", async (req: Request, res: Response) => {
   try {
@@ -50,8 +67,8 @@ productRoutes.get("/products/:id", async (req: Request, res: Response) => {
     const product = await db
       .select()
       .from(products)
-      .where(eq(products.id, Number(id))) 
-      .execute();
+      .where(eq(products.id, Number(id)))
+      .limit(1);
 
     if (!product.length) {
       return res.status(404).json({ error: "Produto não encontrado" });
@@ -64,63 +81,55 @@ productRoutes.get("/products/:id", async (req: Request, res: Response) => {
   }
 });
 
-
 productRoutes.put("/products/:id", async (req: Request, res: Response) => {
   try {
-    const { id } = req.params; 
-    const { nome, price, color, assessment, discount, user_id } = req.body;
+    const { id } = req.params;
+    const { nome, price, discount, image, type, description, assessment, user_id } = req.body;
 
-    const parsed = insertProductSchema.safeParse({ nome, price, color, assessment, discount, user_id });
-    if (!parsed.success) {
-      return res.status(400).json({ error: parsed.error.format() });
+    const productData = insertProductSchema.partial().safeParse({
+      nome,
+      price,
+      discount,
+      image,
+      type,
+      description,
+      assessment,
+      user_id,
+    });
+
+    if (!productData.success) {
+      return res.status(400).json({ error: productData.error.format() });
     }
 
-    const existingProduct = await db
-      .select()
-      .from(products)
-      .where(eq(products.id, Number(id))) 
-      .execute();
+    const [updatedProduct] = await db
+      .update(products)
+      .set(productData.data)
+      .where(eq(products.id, Number(id)))
+      .returning();
 
-    if (!existingProduct.length) {
+    if (!updatedProduct) {
       return res.status(404).json({ error: "Produto não encontrado" });
     }
 
-    const result = await db
-      .update(products)
-      .set({
-        nome,
-        price,
-        color,
-        assessment,
-        discount,
-        user_id,
-      })
-      .where(eq(products.id, Number(id))); 
-
-    return res.status(200).json({ message: "Produto atualizado com sucesso", result });
+    return res.status(200).json(updatedProduct);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao atualizar produto" });
   }
 });
 
-
 productRoutes.delete("/products/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const existingProduct = await db
-      .select()
-      .from(products)
-      .where(eq(products.id, Number(id))) 
-      .execute();
+    const [deletedProduct] = await db
+      .delete(products)
+      .where(eq(products.id, Number(id)))
+      .returning();
 
-    if (!existingProduct.length) {
+    if (!deletedProduct) {
       return res.status(404).json({ error: "Produto não encontrado" });
     }
-
-    await db.delete(products)
-      .where(eq(products.id, Number(id))); 
 
     return res.status(200).json({ message: "Produto excluído com sucesso" });
   } catch (error) {
@@ -128,6 +137,5 @@ productRoutes.delete("/products/:id", async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Erro ao excluir produto" });
   }
 });
-
 
 export default productRoutes;
