@@ -1,16 +1,18 @@
-"use client";
-import { useState } from "react";
+import { useContext } from "react";
 import Sidebar from "./sidebar";
+import { SidebarContext } from "./product-content";
+
 
 export default function SidebarContent() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
 
-  const handleChangeStateSiderBar = () => {
-    setIsOpen(!isOpen);
+  const handleChangeStateSidebar = () => {
+    setIsOpen((prev) => !prev);
   };
+
   return (
     <div>
-      <Sidebar isOpen={isOpen} onchange={handleChangeStateSiderBar} />
+      <Sidebar isOpen={isOpen} onchange={handleChangeStateSidebar} />
     </div>
   );
 }

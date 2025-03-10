@@ -13,7 +13,7 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onchange }: SidebarProps) {
   return (
-    <div className="relative ">
+    <div className="relative bg-red-200">
       <div
         className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ease-in-out lg:hidden ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
