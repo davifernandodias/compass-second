@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
 import { db } from "@repo/db/client";
-import { products } from "@repo/db/schema";
+import { products, productVariants } from "@repo/db/schema";
 import { insertProductSchema } from "@repo/db/schema"; 
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 const productRoutes = Router();
 
@@ -38,25 +38,58 @@ productRoutes.post("/products", async (req: Request, res: Response) => {
 });
 
 productRoutes.get("/products", async (req: Request, res: Response) => {
-  
   try {
-    const initial = parseInt(req.query.initial as string) || 0;
-    const limit = parseInt(req.query.final as string) || 10; 
+    const color = req.query.color as string | undefined;
+    const size = req.query.size as string | undefined;
+    const minPrice = parseFloat(req.query.minPrice as string) || undefined;
+    const maxPrice = parseFloat(req.query.maxPrice as string) || undefined;
+    const quantityInitial = parseInt(req.query.initial as string) || 0;
+    const quantityLimit = parseInt(req.query.final as string) || 10;
 
-    if (initial < 0 || limit <= 0) {
-      return res.status(400).json({ error: "Parâmetros de paginação inválidos" });
+    let query = db.select().from(products)
+      .leftJoin(productVariants, eq(products.id, productVariants.product_id));
+
+    if (color) {
+      query = query.where(eq(productVariants.color, color));
     }
 
-    const productsList = await db
-      .select()
-      .from(products)
-      .offset(initial)
-      .limit(limit); 
+    if (size) {
+      query = query.where(eq(productVariants.size, size));
+    }
 
-    return res.status(200).json(productsList);
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      query = query.where(sql`${products.price} >= ${minPrice} AND ${products.price} <= ${maxPrice}`);
+    } else if (minPrice !== undefined) {
+      query = query.where(sql`${products.price} >= ${minPrice}`);
+    } else if (maxPrice !== undefined) {
+      query = query.where(sql`${products.price} <= ${maxPrice}`);
+    }
+
+    query = query.limit(quantityLimit).offset(quantityInitial);
+
+    const result = await query;
+
+    if (!result.length) {
+      return res.status(404).json({ message: "Nenhum produto encontrado" });
+    }
+
+    const productsGrouped = result.reduce((acc: any[], current: any) => {
+      const existingProduct = acc.find((item) => item.products.id === current.products.id);
+      if (existingProduct) {
+        existingProduct.product_variants.push(current.product_variants);
+      } else {
+        acc.push({
+          products: current.products,
+          product_variants: [current.product_variants],
+        });
+      }
+      return acc;
+    }, []);
+
+    return res.status(200).json(productsGrouped);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Erro ao buscar produtos" });
+    console.error("Erro ao buscar produtos:", error);
+    return res.status(500).json({ message: "Erro ao buscar produtos" });
   }
 });
 
