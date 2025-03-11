@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import { db } from "@repo/db/client";
 import { products, productVariants } from "@repo/db/schema";
 import { insertProductSchema } from "@repo/db/schema"; 
-import { and, eq, gt, lt, sql } from "drizzle-orm";
+import { and, eq, gt, lt } from "drizzle-orm";
 
 const productRoutes = Router();
 
@@ -36,6 +36,8 @@ productRoutes.post("/products", async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Erro ao salvar produto" });
   }
 });
+
+
 productRoutes.get("/products", async (req: Request, res: Response) => {
   try {
     const color = req.query.color as string | undefined;
