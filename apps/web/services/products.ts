@@ -28,6 +28,6 @@ export const getAllProducts = async ({ initial, finalLimit, color, size, minPric
     return await response.json();
   } catch (error) {
     console.error("Erro ao buscar produtos:", error);
-    throw new Error("Não foi possível buscar os produtos");
+    return error
   }
 };

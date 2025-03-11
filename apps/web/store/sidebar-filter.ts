@@ -8,6 +8,7 @@ interface FilterState {
   maxPrice: number;
   color: string;
   size: string;
+  currentPage: number;
 }
 
 interface FilterActions {
@@ -18,6 +19,7 @@ interface FilterActions {
 export const useFilterStore = create<FilterState & FilterActions>((set) => ({
   initialPage: 0,
   finalLimit: 75,
+  currentPage: 0,
   minPrice: 0,
   maxPrice: 500,
   color: "",

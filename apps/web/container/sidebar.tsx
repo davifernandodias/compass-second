@@ -31,6 +31,7 @@ const Sidebar = () => {
     <form onSubmit={(e) => {
       e.preventDefault();
       applyFilters();
+      alert("enviado")
     }}>
       <label>Min Price</label>
       <input
