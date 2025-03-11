@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import { db } from "@repo/db/client";
 import { products, productVariants } from "@repo/db/schema";
 import { insertProductSchema } from "@repo/db/schema"; 
-import { eq, sql } from "drizzle-orm";
+import { and, eq, gt, lt, sql } from "drizzle-orm";
 
 const productRoutes = Router();
 
@@ -36,33 +36,38 @@ productRoutes.post("/products", async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Erro ao salvar produto" });
   }
 });
-
 productRoutes.get("/products", async (req: Request, res: Response) => {
   try {
     const color = req.query.color as string | undefined;
     const size = req.query.size as string | undefined;
-    const minPrice = parseFloat(req.query.minPrice as string) || undefined;
-    const maxPrice = parseFloat(req.query.maxPrice as string) || undefined;
-    const quantityInitial = parseInt(req.query.initial as string) || 0;
-    const quantityLimit = parseInt(req.query.final as string) || 10;
+    const minPrice = req.query.minPrice ? parseFloat(req.query.minPrice as string) : undefined;
+    const maxPrice = req.query.maxPrice ? parseFloat(req.query.maxPrice as string) : undefined;
+    const quantityInitial = req.query.initial ? parseInt(req.query.initial as string) : 0;
+    const quantityLimit = req.query.final ? parseInt(req.query.final as string) : 10;
+
+    let conditions = [];
+
+    if (color) {
+      conditions.push(eq(productVariants.color, color));
+    }
+
+    if (size) {
+      conditions.push(eq(productVariants.size, size));
+    }
+
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      conditions.push(and(gt(products.price, minPrice), lt(products.price, maxPrice)));
+    } else if (minPrice !== undefined) {
+      conditions.push(gt(products.price, minPrice));
+    } else if (maxPrice !== undefined) {
+      conditions.push(lt(products.price, maxPrice));
+    }
 
     let query = db.select().from(products)
       .leftJoin(productVariants, eq(products.id, productVariants.product_id));
 
-    if (color) {
-      query = query.where(eq(productVariants.color, color));
-    }
-
-    if (size) {
-      query = query.where(eq(productVariants.size, size));
-    }
-
-    if (minPrice !== undefined && maxPrice !== undefined) {
-      query = query.where(sql`${products.price} >= ${minPrice} AND ${products.price} <= ${maxPrice}`);
-    } else if (minPrice !== undefined) {
-      query = query.where(sql`${products.price} >= ${minPrice}`);
-    } else if (maxPrice !== undefined) {
-      query = query.where(sql`${products.price} <= ${maxPrice}`);
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
     }
 
     query = query.limit(quantityLimit).offset(quantityInitial);
@@ -92,7 +97,6 @@ productRoutes.get("/products", async (req: Request, res: Response) => {
     return res.status(500).json({ message: "Erro ao buscar produtos" });
   }
 });
-
 
 
 productRoutes.get("/products/:id", async (req: Request, res: Response) => {
