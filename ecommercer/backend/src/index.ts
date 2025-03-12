@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "dotenv/config.js";
 
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
