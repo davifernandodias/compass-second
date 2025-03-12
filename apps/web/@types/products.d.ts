@@ -11,7 +11,7 @@ interface Product {
 }
 
 interface GetProductsReponse {
-  
+
     products: Product
     product_variants: [ unknown[] ]
 
