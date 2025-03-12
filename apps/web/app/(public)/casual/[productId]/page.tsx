@@ -1,4 +1,3 @@
-import Product from "@components/product";
 import IconCollapse from "@public/svg/clothes/icon-collapse";
 
 
@@ -11,7 +10,6 @@ export default function PageRopad() {
               <p>Casual</p>
             </nav>
             <div>
-              <Product  produto="1" quantity={[1]} routeIsActive={false}/>
             </div>
     </section>
 

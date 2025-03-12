@@ -6,7 +6,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", "POSTGRES_URL"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".dist/**", "!.next/cache/**"]  
     },
     "lint": {
       "dependsOn": ["^lint"]

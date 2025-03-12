@@ -1,71 +1,92 @@
 "use client";
-import Product from "@components/product";
-import Sidebar from "@components/sidebar";
-import IconCollapse from "@public/svg/clothes/icon-collapse";
+import Sidebar from "@container/sidebar";
+import { Product } from "@container/product";
+import { useEffect, useState } from "react";
+import { getAllProducts } from "@services/products";
+import { useFilterStore } from "@store/sidebar-filter";
+import NextPage from "@container/next-page";
 import IconFilterMobile from "@public/svg/clothes/icon-filter-mobile";
-import { useState, useEffect } from "react";
+import IconCollapse from "@public/svg/clothes/icon-collapse";
 
-export default function CasualPage() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleChangeStateSiderBar = () => {
-    setIsOpen(!isOpen);
-  };
-  
-  useEffect(() => {
-    if (isOpen && window.innerWidth < 1024) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
-  }, [isOpen]);
+const CasualPage = () => {
+  const { initialPage, finalLimit, minPrice, maxPrice, color, size } = useFilterStore();
+  const [products, setProducts] = useState([]);
+  const [hasMoreProducts, setHasMoreProducts] = useState(true);
+  const [isEnableSidebar, setIsEnableSidebar] = useState(() => window.innerWidth >= 1024);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        document.body.classList.remove("overflow-hidden");
-      }
+      setIsEnableSidebar(window.innerWidth >= 1024);
     };
 
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    const handleFetchProduct = async () => {
+      const fetchedProducts = await getAllProducts({
+        initial: initialPage,
+        finalLimit: finalLimit,
+        color: color,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        size: size,
+      });
+      const hasProducts = fetchedProducts && fetchedProducts.length > 0;
+      setProducts(fetchedProducts || []);
+      setHasMoreProducts(hasProducts);
+      console.log(fetchedProducts);
     };
-  }, []);
+    handleFetchProduct();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [initialPage, finalLimit, color, maxPrice, minPrice, size]);
+
+  const isEnableNextPage = hasMoreProducts;
+
+  const toggleSidebar = () => {
+    setIsEnableSidebar((prev) => !prev);
+    console.log("Sidebar visível:", !isEnableSidebar);
+  };
 
   return (
-    <section className="flex flex-col gap-6 bg-white p-4 lg:px-16">
-      <nav className="flex gap-1 font-family-satoshi-medium items-center">
-        <p className="text-gray-text">Home</p>
-        <IconCollapse className="w-3.5 h-3 mt-0.5" />
-        <p>Casual</p>
+    <section>
+      <nav className="flex gap-2 bg-white items-center pl-4 lg:pl-16">
+        <p className="text-gray-text font-family-satoshi-medium font-medium">Home</p>
+        <IconCollapse className="w-3 h-3 "/>
+        <p className="font-family-satoshi-medium font-medium">Casual</p>
       </nav>
-      <div className="flex lg:gap-16">
-        <Sidebar isOpen={isOpen} onchange={handleChangeStateSiderBar} />
-
-        <div className="flex flex-col gap-12 w-full">
-          <div className="flex justify-between items-end">
-            <div className="flex gap-2 items-end lg:justify-between w-full">
-              <h1 className="font-family-satoshi-medium text-2xl font-bold">
-                Casual
-              </h1>
-              <p className="text-gray-text font-family-satoshi-regular">
-                Showing 1-10 of 100 Products
-              </p>
-            </div>
-            <div className="bg-gray-secundary rounded-full lg:hidden">
-              <div onClick={handleChangeStateSiderBar}>
-                <IconFilterMobile className="w-10 h-10" />
+      <section className="flex gap-6 bg-white p-4 lg:px-16">
+        <Sidebar onChange={toggleSidebar} isEnableSidebar={isEnableSidebar} />
+        <div className="flex flex-col gap-6">
+          <div className="flex gap-6 ">
+            <div className="flex justify-between items-center w-full ">
+              <div className="flex gap-4 items-center lg:justify-between w-full">
+                <div>
+                  <p className="font-family-satoshi-medium font-bold text-xl lg:text-2xl">Casual</p>
+                </div>
+                <div className="flex gap-4">
+                  <p className="font-family-satoshi-regular text-14 font-normal text-gray-text">Showing 1-10 of 100 Products</p>
+                  <div className="items-center gap-2 hidden lg:flex">
+                    <p className="text-gray-text font-family-satoshi-regular text-14 font-normal ">Sort by:</p>
+                    <p className="font-family-satoshi-regular text-14 font-bold ">Most Popular</p>
+                    <IconCollapse className="w-3 h-3 -rotate-270"/>
+                  </div>
+                </div>
+              </div>
+              <div onClick={toggleSidebar} className="lg:hidden">
+                <IconFilterMobile className="w-8 h-8" />
               </div>
             </div>
           </div>
-          <Product  produto="oi" quantity={[1,2,3,4,5,6,7,8,9]} routeIsActive={true}/>
+          <Product products={products} />
+          <NextPage enableNextPage={isEnableNextPage} />
         </div>
-      </div>
+      </section>
     </section>
   );
-}
+};
+
+export default CasualPage;

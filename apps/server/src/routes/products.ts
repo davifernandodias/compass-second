@@ -1,47 +1,105 @@
 import { Request, Response, Router } from "express";
 import { db } from "@repo/db/client";
-import { products } from "@repo/db/schema";
-import { insertProductSchema, selectProductSchema } from "@repo/db/schema";
-import { eq } from "drizzle-orm"; 
+import { products, productVariants } from "@repo/db/schema";
+import { insertProductSchema } from "@repo/db/schema"; 
+import { and, eq, gt, lt } from "drizzle-orm";
 
 const productRoutes = Router();
 
 productRoutes.post("/products", async (req: Request, res: Response) => {
   try {
-    const { nome, price, color, assessment, discount, user_id } = req.body;
+    const { nome, price, discount, image, type, description, assessment, user_id } = req.body;
 
-    const parsed = insertProductSchema.safeParse({ nome, price, color, assessment, discount, user_id });
-    if (!parsed.success) {
-      return res.status(400).json({ error: parsed.error.format() });
+    const productData = insertProductSchema.safeParse({
+      nome,
+      price,
+      discount,
+      image,
+      type,
+      description,
+      assessment,
+      user_id,
+    });
+
+    if (!productData.success) {
+      return res.status(400).json({ error: productData.error.format() });
     }
 
-    const result = await db
+    const [newProduct] = await db
       .insert(products)
-      .values({
-        nome,
-        price,
-        color,
-        assessment,
-        discount,
-        user_id,
-      });
+      .values(productData.data)
+      .returning();
 
-    return res.status(201).json(result);
+    return res.status(201).json(newProduct);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao salvar produto" });
   }
 });
 
+
 productRoutes.get("/products", async (req: Request, res: Response) => {
   try {
-    const productsList = await db.select().from(products);
-    return res.status(200).json(productsList);
+    const color = req.query.color as string | undefined;
+    const size = req.query.size as string | undefined;
+    const minPrice = req.query.minPrice ? parseFloat(req.query.minPrice as string) : undefined;
+    const maxPrice = req.query.maxPrice ? parseFloat(req.query.maxPrice as string) : undefined;
+    const quantityInitial = req.query.initial ? parseInt(req.query.initial as string) : 0;
+    const quantityLimit = req.query.final ? parseInt(req.query.final as string) : 10;
+
+    let conditions = [];
+
+    if (color) {
+      conditions.push(eq(productVariants.color, color));
+    }
+
+    if (size) {
+      conditions.push(eq(productVariants.size, size));
+    }
+
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      conditions.push(and(gt(products.price, minPrice), lt(products.price, maxPrice)));
+    } else if (minPrice !== undefined) {
+      conditions.push(gt(products.price, minPrice));
+    } else if (maxPrice !== undefined) {
+      conditions.push(lt(products.price, maxPrice));
+    }
+
+    let query = db.select().from(products)
+      .leftJoin(productVariants, eq(products.id, productVariants.product_id));
+
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
+    }
+
+    query = query.limit(quantityLimit).offset(quantityInitial);
+
+    const result = await query;
+
+    if (!result.length) {
+      return res.status(404).json({ message: "Nenhum produto encontrado" });
+    }
+
+    const productsGrouped = result.reduce((acc: any[], current: any) => {
+      const existingProduct = acc.find((item) => item.products.id === current.products.id);
+      if (existingProduct) {
+        existingProduct.product_variants.push(current.product_variants);
+      } else {
+        acc.push({
+          products: current.products,
+          product_variants: [current.product_variants],
+        });
+      }
+      return acc;
+    }, []);
+
+    return res.status(200).json(productsGrouped);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Erro ao buscar produtos" });
+    console.error("Erro ao buscar produtos:", error);
+    return res.status(500).json({ message: "Erro ao buscar produtos" });
   }
 });
+
 
 productRoutes.get("/products/:id", async (req: Request, res: Response) => {
   try {
@@ -50,8 +108,8 @@ productRoutes.get("/products/:id", async (req: Request, res: Response) => {
     const product = await db
       .select()
       .from(products)
-      .where(eq(products.id, Number(id))) 
-      .execute();
+      .where(eq(products.id, Number(id)))
+      .limit(1);
 
     if (!product.length) {
       return res.status(404).json({ error: "Produto não encontrado" });
@@ -64,63 +122,55 @@ productRoutes.get("/products/:id", async (req: Request, res: Response) => {
   }
 });
 
-
 productRoutes.put("/products/:id", async (req: Request, res: Response) => {
   try {
-    const { id } = req.params; 
-    const { nome, price, color, assessment, discount, user_id } = req.body;
+    const { id } = req.params;
+    const { nome, price, discount, image, type, description, assessment, user_id } = req.body;
 
-    const parsed = insertProductSchema.safeParse({ nome, price, color, assessment, discount, user_id });
-    if (!parsed.success) {
-      return res.status(400).json({ error: parsed.error.format() });
+    const productData = insertProductSchema.partial().safeParse({
+      nome,
+      price,
+      discount,
+      image,
+      type,
+      description,
+      assessment,
+      user_id,
+    });
+
+    if (!productData.success) {
+      return res.status(400).json({ error: productData.error.format() });
     }
 
-    const existingProduct = await db
-      .select()
-      .from(products)
-      .where(eq(products.id, Number(id))) 
-      .execute();
+    const [updatedProduct] = await db
+      .update(products)
+      .set(productData.data)
+      .where(eq(products.id, Number(id)))
+      .returning();
 
-    if (!existingProduct.length) {
+    if (!updatedProduct) {
       return res.status(404).json({ error: "Produto não encontrado" });
     }
 
-    const result = await db
-      .update(products)
-      .set({
-        nome,
-        price,
-        color,
-        assessment,
-        discount,
-        user_id,
-      })
-      .where(eq(products.id, Number(id))); 
-
-    return res.status(200).json({ message: "Produto atualizado com sucesso", result });
+    return res.status(200).json(updatedProduct);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Erro ao atualizar produto" });
   }
 });
 
-
 productRoutes.delete("/products/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const existingProduct = await db
-      .select()
-      .from(products)
-      .where(eq(products.id, Number(id))) 
-      .execute();
+    const [deletedProduct] = await db
+      .delete(products)
+      .where(eq(products.id, Number(id)))
+      .returning();
 
-    if (!existingProduct.length) {
+    if (!deletedProduct) {
       return res.status(404).json({ error: "Produto não encontrado" });
     }
-
-    await db.delete(products)
-      .where(eq(products.id, Number(id))); 
 
     return res.status(200).json({ message: "Produto excluído com sucesso" });
   } catch (error) {
@@ -128,6 +178,5 @@ productRoutes.delete("/products/:id", async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Erro ao excluir produto" });
   }
 });
-
 
 export default productRoutes;

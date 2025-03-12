@@ -8,7 +8,8 @@
     "push": "npx drizzle-kit push",
     "studio": "npx drizzle-kit studio --verbose",
     "with-env": "dotenv -e ../../.env -c --",
-    "seed": "npx run with-env npx --npx run ./src/seed.ts"
+    "seed": "npx run with-env npx --npx run ./src/seed.ts",
+    "build": "tsc"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

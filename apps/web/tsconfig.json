@@ -10,7 +10,9 @@
       "@components/*": ["./components/*"],
       "@public/*": ["./public/*"],
       "@interfaces/*": ["./interfaces/*"],
-      "@hooks/*": ["./hooks/*"]
+      "@container/*": ["./container/*"],
+      "@services/*": ["./services/*"],
+      "@store/*": ["./store/*"],
     }
   },
   "include": [
