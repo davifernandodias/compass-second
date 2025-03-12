@@ -46,5 +46,4 @@ process.on("uncaughtException", (error) => {
   });
 });
 
-// Exporte tanto o server quanto o db
 export { server, db };
