@@ -1,3 +1,4 @@
+import * as dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
 import userRoutes from "./routes/users";
@@ -28,8 +29,8 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 const server = createServer(app);
 
-server.listen(8080, () => {
-  console.log("Servidor iniciado na porta 8080");
+server.listen(process.env.PORT_API, () => {
+  console.log("Servidor iniciado na porta " + process.env.PORT_API);
 });
 
 process.on("unhandledRejection", (reason, promise) => {
