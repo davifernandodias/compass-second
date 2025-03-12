@@ -7,9 +7,11 @@ import { getAllProducts } from "@services/products";
 import { useFilterStore } from "@store/sidebar-filter";
 import NextPage from "@container/next-page";
 import { Button } from "@repo/ui/button";
+import IconFilterMobile from "@public/svg/clothes/icon-filter-mobile";
 
 const CasualPage = () => {
-  const { initialPage, finalLimit, minPrice, maxPrice, color, size } = useFilterStore();
+  const { initialPage, finalLimit, minPrice, maxPrice, color, size } =
+    useFilterStore();
   const [products, setProducts] = useState([]);
   const [hasMoreProducts, setHasMoreProducts] = useState(true);
   const [isEnableSidebar, setIsEnableSidebar] = useState(true);
@@ -41,14 +43,16 @@ const CasualPage = () => {
 
   return (
     <section className="flex gap-6 bg-white p-4 lg:px-16">
-      <Sidebar
-        onChange={toggleSidebar}
-        isEnableSidebar={isEnableSidebar}
-      />
+      <Sidebar onChange={toggleSidebar} isEnableSidebar={isEnableSidebar} />
       <div>
         <div className="flex gap-6">
-          <p>oii</p>
-          <Button onclick={toggleSidebar} className="bg-black text-white">filter</Button>
+          <div
+            className="flex justify-between items-center w-full"
+            onClick={toggleSidebar}
+          >
+            <p>balbla</p>
+            <IconFilterMobile className="w-8 h-8 bg-red-500" />
+          </div>
         </div>
         <Product products={products} />
         <NextPage enableNextPage={isEnableNextPage} />
