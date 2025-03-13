@@ -1,5 +1,4 @@
 import "dotenv/config.js";
-
 import express, { NextFunction, Request, Response } from "express";
 import { createServer } from "http";
 import userRoutes from "./routes/users.js";
@@ -7,21 +6,28 @@ import productRoutes from "./routes/products.js";
 import cartRoutes from "./routes/cart.js";
 import { errorHandler } from "./utils/error-handler.js";
 import { db } from "./db/connection.js";
-import cors from "cors"
+import cors from "cors";
 
 const app = express();
 
-if (!process.env.API_URL_FRONTEND)
-  throw new Error("Missing POSTGRES_URL environment variable!");
+// Verificando as variáveis de ambiente
+if (!process.env.API_URL_FRONTEND_DEPLOY) 
+  throw new Error("Missing API_URL_FRONTEND_DEPLOY environment variable!");
+if (!process.env.API_URL_FRONTEND_LOCAL)
+  throw new Error("Missing API_URL_FRONTEND_LOCAL environment variable!");
 
 app.use(express.json());
+
 const corsOptions = {
-  origin: `${process.env.API_URL_FRONTEND}`,
+  origin: [
+    `${process.env.API_URL_FRONTEND_DEPLOY}`,
+    `${process.env.API_URL_FRONTEND_LOCAL}`,
+  ],
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type, Authorization",
 };
-app.use(cors(corsOptions));
 
+app.use(cors(corsOptions));
 
 app.use("/api", userRoutes);
 app.use("/api", productRoutes);
