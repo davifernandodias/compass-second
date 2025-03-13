@@ -1,0 +1,29 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space     
+indent_size = 2            
+end_of_line = lf          
+insert_final_newline = true
+trim_trailing_whitespace = true  
+
+[*.{js,ts,jsx,tsx}]
+indent_size = 2
+max_line_length = 120   
+
+[*.json]
+indent_size = 2
+max_line_length = 120   
+
+[*.{css,scss,less,html}]
+indent_size = 2
+max_line_length = 120   
+
+[*.md]
+indent_size = 2
+max_line_length = 80    
+
+[*.jsonc]
+indent_size = 2
+max_line_length = 120   

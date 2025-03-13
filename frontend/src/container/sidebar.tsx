@@ -1,15 +1,15 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { useFilterStore } from "../store/sidebar-filter";
+import { useFilterStore } from "../store/sidebar-filter-reducer";
 import IconFilterSidebar from "@public/svg/clothes/icon-filter-sidebar";
 import IconCollapse from "@public/svg/clothes/icon-collapse";
 
 import { Check } from 'lucide-react';
 import IconCloseSideber from "@public/svg/clothes/icon-close-sideber";
-import { colors } from "@/store/sidebar-colors";
+import { colors } from "@/utils/sidebar-colors";
 import { Button } from "@/components/ui/button";
-import { sizes } from "@/store/sidebar-sizes";
+import { sizes } from "@/utils/sidebar-sizes";
 
 interface SidebarProps {
   isEnableSidebar: boolean;
@@ -84,7 +84,6 @@ const Sidebar = ({ isEnableSidebar, onChange }: SidebarProps) => {
 
   return (
     <>
-      {/* Overlay for mobile */}
       {isMobile && (
         <div
           className="fixed inset-0 bg-black/50 z-40"
@@ -241,11 +240,10 @@ const Sidebar = ({ isEnableSidebar, onChange }: SidebarProps) => {
                   <div
                     key={size}
                     onClick={() => handleInputChange("size", size)}
-                    className={`px-3 py-2 rounded-full cursor-pointer transition-colors font-family-satoshi-medium ${
-                      tempFilters.size === size
-                        ? "bg-black text-white"
-                        : "bg-gray-100 text-black hover:bg-black hover:text-white"
-                    }`}
+                    className={`px-3 py-2 rounded-full cursor-pointer transition-colors font-family-satoshi-medium ${tempFilters.size === size
+                      ? "bg-black text-white"
+                      : "bg-gray-100 text-black hover:bg-black hover:text-white"
+                      }`}
                   >
                     {size}
                   </div>

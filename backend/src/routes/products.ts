@@ -1,41 +1,9 @@
 import { Request, Response, Router } from "express";
 import { db } from "../db/connection";
-import { products, productVariants } from "../db/schema.js";
-import { insertProductSchema } from "../db/schema.js"; 
+import { products, productVariants, reviews } from "../db/schema.js";
 import { and, eq, gt, lt } from "drizzle-orm";
 
 const productRoutes = Router();
-
-productRoutes.post("/products", async (req: Request, res: Response) => {
-  try {
-    const { nome, price, discount, image, type, description, assessment, user_id } = req.body;
-
-    const productData = insertProductSchema.safeParse({
-      nome,
-      price,
-      discount,
-      image,
-      type,
-      description,
-      assessment,
-      user_id,
-    });
-
-    if (!productData.success) {
-      return res.status(400).json({ error: productData.error.format() });
-    }
-
-    const [newProduct] = await db
-      .insert(products)
-      .values(productData.data)
-      .returning();
-
-    return res.status(201).json(newProduct);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Erro ao salvar produto" });
-  }
-});
 
 
 productRoutes.get("/products", async (req: Request, res: Response) => {
@@ -100,83 +68,53 @@ productRoutes.get("/products", async (req: Request, res: Response) => {
   }
 });
 
-
 productRoutes.get("/products/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const product = await db
-      .select()
-      .from(products)
-      .where(eq(products.id, Number(id)))
-      .limit(1);
-
-    if (!product.length) {
-      return res.status(404).json({ error: "Produto não encontrado" });
+    const productId = Number(id);
+    if (isNaN(productId)) {
+      return res.status(400).json({ error: "ID inválido" });
     }
 
-    return res.status(200).json(product[0]);
+    const result = await db
+      .select({
+        products: products,
+        product_variants: productVariants,
+        reviews: reviews,
+      })
+      .from(products)
+      .leftJoin(productVariants, eq(products.id, productVariants.product_id))
+      .innerJoin(reviews, eq(products.id, reviews.product_id)) 
+      .where(eq(products.id, productId));
+
+    if (!result.length) {
+      return res.status(404).json({ error: "Produto ou revisões não encontrados" });
+    }
+
+    const productGrouped = result.reduce(
+      (acc: any, current: any) => {
+        if (current.product_variants && !acc.product_variants.some((v: any) => v?.id === current.product_variants.id)) {
+          acc.product_variants.push(current.product_variants);
+        }
+        if (current.reviews && !acc.reviews.some((r: any) => r.id === current.reviews.id)) {
+          acc.reviews.push(current.reviews);
+        }
+        return acc;
+      },
+      {
+        products: result[0]?.products || {},
+        product_variants: [],
+        reviews: [], 
+      }
+    );
+
+    return res.status(200).json(productGrouped);
   } catch (error) {
-    console.error(error);
+    console.error("Erro ao buscar produto por ID:", error);
     return res.status(500).json({ error: "Erro ao buscar produto" });
   }
 });
 
-productRoutes.put("/products/:id", async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const { nome, price, discount, image, type, description, assessment, user_id } = req.body;
-
-    const productData = insertProductSchema.partial().safeParse({
-      nome,
-      price,
-      discount,
-      image,
-      type,
-      description,
-      assessment,
-      user_id,
-    });
-
-    if (!productData.success) {
-      return res.status(400).json({ error: productData.error.format() });
-    }
-
-    const [updatedProduct] = await db
-      .update(products)
-      .set(productData.data)
-      .where(eq(products.id, Number(id)))
-      .returning();
-
-    if (!updatedProduct) {
-      return res.status(404).json({ error: "Produto não encontrado" });
-    }
-
-    return res.status(200).json(updatedProduct);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Erro ao atualizar produto" });
-  }
-});
-
-productRoutes.delete("/products/:id", async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-
-    const [deletedProduct] = await db
-      .delete(products)
-      .where(eq(products.id, Number(id)))
-      .returning();
-
-    if (!deletedProduct) {
-      return res.status(404).json({ error: "Produto não encontrado" });
-    }
-
-    return res.status(200).json({ message: "Produto excluído com sucesso" });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Erro ao excluir produto" });
-  }
-});
 
 export default productRoutes;

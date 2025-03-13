@@ -1,20 +1,4 @@
-// store.ts
 import { create } from "zustand";
-
-interface FilterState {
-  initialPage: number;
-  finalLimit: number;
-  minPrice: number;
-  maxPrice: number;
-  color: string;
-  size: string;
-  currentPage: number;
-}
-
-interface FilterActions {
-  setValue: (field: keyof FilterState, value: string | number) => void;
-  reset: () => void;
-}
 
 export const useFilterStore = create<FilterState & FilterActions>((set) => ({
   initialPage: 0,

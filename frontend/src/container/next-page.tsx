@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useFilterStore } from "@/store/sidebar-filter";
+import { useFilterStore } from "@/store/sidebar-filter-reducer";
 import { ArrowLeft } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
@@ -40,11 +40,10 @@ export default function NextPage({ enableNextPage }: NextPageProps) {
     return pages.map((page, index) => (
       <p
         key={index}
-        className={`p-2 px-3 rounded-md cursor-pointer transition text-sm md:text-base ${
-          page === currentPage + 1
-            ? "bg-primary-color text-black font-bold"
-            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-        }`}
+        className={`p-2 px-3 rounded-md   cursor-pointer transition text-sm font-family-satoshi-regular text-gray-text md:text-base ${page === currentPage + 1
+            ? "bg-primary-color text-black bg-gray-secundary "
+            : "bg-transparent text-gray-700"
+          }`}
       >
         {page}
       </p>
@@ -52,37 +51,32 @@ export default function NextPage({ enableNextPage }: NextPageProps) {
   };
 
   return (
-    <div className="flex flex-wrap gap-2 md:gap-4 items-center justify-center md:justify-between  bg-green-200">
-      {/* Botão Anterior */}
+    <div className="flex flex-wrap gap-2 md:gap-4 items-center justify-center md:justify-between ">
       <Button
         onclick={handlePreviousPage}
         disabled={currentPage === 0}
-        className={`flex items-center text-sm md:text-base p-2 px-3 gap-2 font-medium border rounded-lg transition ${
-          currentPage === 0
+        className={`flex items-center text-12 md:text-base p-2 px-3 gap-2 font-medium border rounded-lg transition ${currentPage === 0
             ? "border-gray-300 text-gray-400 cursor-not-allowed"
             : "border-gray-secundary hover:bg-gray-100"
-        }`}
+          }`}
         aria-label="Página anterior"
       >
         <ArrowLeft size={16} />
-        Anterior
+        Previous
       </Button>
 
-      {/* Indicador de Páginas */}
       <div className="flex flex-wrap items-center gap-2 md:gap-3">{renderPagination()}</div>
 
-      {/* Botão Próximo */}
       <Button
         onclick={handleNextPage}
         disabled={!enableNextPage}
-        className={`flex items-center text-sm md:text-base p-2 px-3 gap-2 font-medium border rounded-lg transition ${
-          !enableNextPage
+        className={`flex items-center text-12 md:text-base p-2 lg:px-3 gap-2 font-medium border rounded-lg transition ${!enableNextPage
             ? "border-gray-300 text-gray-400 cursor-not-allowed"
             : "border-gray-secundary hover:bg-gray-100"
-        }`}
+          }`}
         aria-label="Próxima página"
       >
-        Próximo
+        Next
         <ArrowRight size={16} />
       </Button>
     </div>

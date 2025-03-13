@@ -22,6 +22,8 @@
       "@/*": ["./src/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@public/*": ["./public/*"],
+      "@container/*": ["./src/container/*"],
+      "@mock/*": ["./mock/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
