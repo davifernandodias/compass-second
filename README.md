@@ -24,4 +24,4 @@ This repo’s split into two main squads:
 ## How to Check It Out
 Wanna dive in? Hit up this link to the homepage—it’s got all the redirects you need to jump into the app and hit the casual catalog endpoint. From there, just kick back and explore:
 
-👉 [https://davifernandodias.github.io/compass-one/](https://davifernandodias.github.io/compass-one/)
+👉 [https://davifernandodias.github.io/compass-one/](https://compass-one-nine.vercel.app/)
