@@ -55,7 +55,7 @@ export default function NextPage({ enableNextPage }: NextPageProps) {
       <Button
         onclick={handlePreviousPage}
         disabled={currentPage === 0}
-        className={`flex items-center text-12 md:text-base p-2 px-3 gap-2 font-medium border rounded-lg transition ${currentPage === 0
+        className={`flex items-center cursor-pointer  text-12 md:text-base p-2 px-3 gap-2 font-medium border rounded-lg transition ${currentPage === 0
             ? "border-gray-300 text-gray-400 cursor-not-allowed"
             : "border-gray-secundary hover:bg-gray-100"
           }`}
@@ -70,7 +70,7 @@ export default function NextPage({ enableNextPage }: NextPageProps) {
       <Button
         onclick={handleNextPage}
         disabled={!enableNextPage}
-        className={`flex items-center text-12 md:text-base p-2 lg:px-3 gap-2 font-medium border rounded-lg transition ${!enableNextPage
+        className={`flex items-center cursor-pointer text-12 md:text-base p-2 lg:px-3 gap-2 font-medium border rounded-lg transition ${!enableNextPage
             ? "border-gray-300 text-gray-400 cursor-not-allowed"
             : "border-gray-secundary hover:bg-gray-100"
           }`}

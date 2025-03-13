@@ -8,7 +8,7 @@ import { getAllProducts } from "@/services/products";
 import Sidebar from "@/container/sidebar";
 import { Product } from "@/container/product/product";
 import NextPage from "@/container/next-page";
-import { mockProducts } from "@mock/product"
+// import { mockProducts } from "@mock/product"
 
 const CasualPage = () => {
   const { initialPage, finalLimit, minPrice, maxPrice, color, size } = useFilterStore();
@@ -90,7 +90,7 @@ const CasualPage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-7">
-            <Product products={mockProducts} />
+            <Product products={products} />
             <div className="h-px bg-gray-200" />
             <NextPage enableNextPage={isEnableNextPage} />
           </div>

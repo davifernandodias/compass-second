@@ -1,16 +1,16 @@
 import IconHalfStar from "@public/svg/clothes/icon-half-star";
 import IconStars from "@public/svg/clothes/icon-stars";
 import Image from "next/image";
-import SpecificSelectionDetail from "@container/specific-selection-detail";
+import SpecificSelectionDetail from "@/container/product/product-specific-selection-detail";
 
 const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResponse }) => {
   return (
     <div className="flex flex-col gap-6 justify-center lg:justify-start lg:gap-6 lg:pl-16 lg:px-20 p-3 lg:flex lg:flex-row">
       <div className="flex justify-between flex-col gap-3 lg:flex lg:flex-row-reverse lg:gap-3">
-        <div className="flex justify-center items-center p-1.5 bg-gray-secundary rounded-2xl">
+        <div className="flex justify-center items-center p-1.5 bg-gray-secundary rounded-2xl group">
           <Image
             src={`${productGroupById.products.image}`}
-            className="w-96 h-64 lg:w-[500px] lg:h-[530px]"
+            className="w-96 h-64 lg:w-[500px] lg:h-[530px] transition-transform duration-300 group-hover:scale-105"
             width={150}
             height={260}
             alt="Product Image"
@@ -22,11 +22,11 @@ const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResp
             .map((_, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center p-1.5 bg-gray-secundary rounded-2xl"
+                className="flex items-center justify-center p-1.5 bg-gray-secundary rounded-2xl group"
               >
                 <Image
                   src={`${productGroupById.products.image}`}
-                  className="lg:w-48 lg:h-44"
+                  className="lg:w-48 lg:h-44 transition-transform duration-300 group-hover:scale-105"
                   width={150}
                   height={260}
                   alt="Product Thumbnail"

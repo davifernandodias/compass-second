@@ -10,7 +10,6 @@ import cors from "cors";
 
 const app = express();
 
-// Verificando as variáveis de ambiente
 if (!process.env.API_URL_FRONTEND_DEPLOY) 
   throw new Error("Missing API_URL_FRONTEND_DEPLOY environment variable!");
 if (!process.env.API_URL_FRONTEND_LOCAL)

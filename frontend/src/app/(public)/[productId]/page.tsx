@@ -31,11 +31,11 @@ const PageDetail = () => {
     };
     handleFetchData();
   }, [params.productId]);
-  
+
   if (loading) {
     return <div>Carregando...</div>;
   }
-  
+
   if (!product) {
     return <div>Produto não encontrado</div>;
   }
@@ -85,9 +85,10 @@ const PageDetail = () => {
           <ProductReviews productGroup={product} />
         </div>
         <div className="flex justify-center">
-          <Button className="w-48 h-12 rounded-3xl cursor-pointer border border-gray-secundary font-family-satoshi-medium text-14 font-medium">
+          <Button className="w-48 h-12 rounded-3xl cursor-pointer border border-gray-secundary font-family-satoshi-medium text-14 font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg">
             Load More Reviews
           </Button>
+
         </div>
         <div className="flex flex-col justify-center items-center gap-10 px-4">
           <div className="font-family-integral-medium font-bold text-3xl text-center px-10 lg:text-5xl">
