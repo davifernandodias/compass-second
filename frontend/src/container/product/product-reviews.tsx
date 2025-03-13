@@ -19,13 +19,15 @@ const ProductReviews = ({ productGroup }: { productGroup: GetProductsResponse })
   return (
     <div className="flex flex-col justify-center items-center bg-white lg:p-6">
       {reviewsWithProductAssessment.length > 0 ? (
-        <div className="flex flex-col gap-4 lg:grid lg:grid-cols-2  lg:items-center  lg:gap-8">
+        <div className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:items-center lg:gap-14">
           {reviewsWithProductAssessment.map((review, index) => {
-            
             const formattedDate = formatDate(review.feedback_date);
 
             return (
-              <div key={index} className="flex flex-col gap-2.5 border border-gray-secundary rounded-3xl p-7  lg:h-60 lg:w-[610px]">
+              <div
+                key={index}
+                className="flex flex-col gap-2.5 border border-gray-secundary rounded-3xl p-7 lg:h-60 lg:w-[650px] transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+              >
                 <div className="flex gap-2">
                   {Array.from({ length: Math.floor(review.assessment!) }).map((_, index) => (
                     <IconStars key={index} className="w-4.5 h-4.5 lg:w-4.5 lg:h-4.5" />
@@ -49,7 +51,6 @@ const ProductReviews = ({ productGroup }: { productGroup: GetProductsResponse })
                   </div>
                 </div>
               </div>
-              
             );
           })}
         </div>

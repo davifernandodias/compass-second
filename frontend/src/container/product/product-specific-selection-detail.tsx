@@ -1,3 +1,4 @@
+"use client"
 import { Check, Tally1 } from "lucide-react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -33,8 +34,6 @@ const SpecificSelectionDetail = () => {
     });
   };
 
-
-
   return (
     <div className="flex flex-col gap-6">
       <ToastContainer />
@@ -46,7 +45,7 @@ const SpecificSelectionDetail = () => {
               key={color.hex}
               type="button"
               className={`w-10 h-10 rounded-full flex items-center justify-center ${selectedColor === color.hex ? "" : ""
-                }`}
+                } transition-all duration-300 hover:scale-105 hover:shadow-lg`}
               style={{ backgroundColor: color.hex }}
               onClick={() => setSelectedColor(color.hex)}
               aria-label={`Select ${color.name} color`}
@@ -67,7 +66,7 @@ const SpecificSelectionDetail = () => {
               key={size}
               className={`px-6 py-2 rounded-full cursor-pointer transition-colors font-family-satoshi-medium ${selectedSize === size
                   ? "bg-black text-white"
-                  : "bg-gray-100 text-black hover:bg-black hover:text-white"
+                  : "bg-gray-100 text-black hover:bg-black hover:text-white hover:scale-105"
                 }`}
               onClick={() => setSelectedSize(size)}
             >
@@ -82,14 +81,14 @@ const SpecificSelectionDetail = () => {
       <div className="flex items-center justify-start gap-3">
         <div className="flex items-center bg-gray-100 rounded-full px-3 py-2">
           <Button
-            className="w-8 h-8 flex items-center justify-center cursor-pointer"
+            className="w-8 h-8 flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 "
             onclick={handleRemoveProductInCart}
           >
             <Tally1 className="rotate-90 mt-3 text-gray-700" size={16} />
           </Button>
           <span className="text-lg font-semibold px-4 font-family-satoshi-medium text-14">{quantityProductInCart}</span>
           <Button
-            className="w-8 h-8 flex items-center justify-center cursor-pointer"
+            className="w-8 h-8 flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105 "
             onclick={handleAddedProductInCart}
           >
             <X className="text-gray-700 -rotate-45" size={16} />
@@ -97,7 +96,7 @@ const SpecificSelectionDetail = () => {
         </div>
 
         <Button
-          className="bg-black text-white text-lg w-60 h-11 font-family-satoshi-medium font-medium text-14 rounded-full lg:text-16 lg:w-96"
+          className="bg-black text-white cursor-pointer text-lg w-60 h-11 font-family-satoshi-medium font-medium text-14 rounded-full lg:text-16 lg:w-96 transition-all duration-300 hover:scale-105 hover:shadow-lg"
           onclick={handleAddToCart}
         >
           Add to Cart

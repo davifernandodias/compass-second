@@ -1,4 +1,5 @@
 "use client"
+
 import { settings } from "@/utils/product-detail-carrosel"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
@@ -8,13 +9,12 @@ import IconStars from "@public/svg/clothes/icon-stars"
 import IconHalfStar from "@public/svg/clothes/icon-half-star"
 import Link from "next/link"
 
-
 const ProductDetailCarrosel = ({ products }: { products: GetProductsResponse[] }) => {
   return (
     <Slider {...settings}>
       {products.map((productGroup, index) => (
         <Link href={`/${productGroup.products.id}`} key={index}>
-          <div className="px-2 rounded-2xl">
+          <div className="px-2 rounded-2xl transform transition-all hover:scale-90 ">
             <div className="flex flex-col items-center rounded-2xl">
               <Image
                 src={productGroup.products.image || "/fallback-image.jpg"}
