@@ -1,11 +1,11 @@
 
-const ProductDatail = () => {
+const ProductDetail = () => {
   
   return (
-    <div>
-
+    <div className="bg-green-500">
+        <h1>product detail</h1>
     </div>
   )
 }
 
-export default ProductDatail;
+export default ProductDetail;

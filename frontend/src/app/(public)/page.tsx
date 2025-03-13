@@ -8,7 +8,7 @@ import { getAllProducts } from "@/services/products";
 import Sidebar from "@/container/sidebar";
 import { Product } from "@/container/product";
 import NextPage from "@/container/next-page";
-import { mockProducts } from "../../../mock/product";
+import { mockProducts } from "@mock/product"
 
 const CasualPage = () => {
   const { initialPage, finalLimit, minPrice, maxPrice, color, size } = useFilterStore();
