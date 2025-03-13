@@ -1,4 +1,4 @@
-export const mockProducts: GetProductsReponse[] = [
+export const mockProducts: GetProductsResponse[] = [
   {
     products: {
       id: 1,
@@ -11,7 +11,7 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 4.5, 
       user_id: null
     },
-    product_variants: [[]]
+    product_variants: []
   },
   {
     products: {
@@ -25,7 +25,7 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 4.0,
       user_id: null
     },
-    product_variants: [["M", "L", "XL"]]
+    product_variants: []
   },
   {
     products: {
@@ -39,7 +39,7 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 3,
       user_id: null
     },
-    product_variants: [["S", "M"]]
+    product_variants: []
   },
   {
     products: {
@@ -53,7 +53,7 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 4.5,
       user_id: null
     },
-    product_variants: [[]]
+    product_variants: []
   },
   {
     products: {
@@ -67,7 +67,7 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 5,
       user_id: null
     },
-    product_variants: [[]]
+    product_variants: []
   },
   {
     products: {
@@ -81,7 +81,7 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 4,
       user_id: null
     },
-    product_variants: [[]]
+    product_variants: []
   },
   {
     products: {
@@ -95,7 +95,7 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 4,
       user_id: null
     },
-    product_variants: [[]]
+    product_variants: []
   },
   {
     products: {
@@ -109,7 +109,7 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 4,
       user_id: null
     },
-    product_variants: [[]]
+    product_variants: []
   },
   {
     products: {
@@ -123,6 +123,6 @@ export const mockProducts: GetProductsReponse[] = [
       assessment: 4,
       user_id: null
     },
-    product_variants: [[]]
+    product_variants: []
   }
 ];
