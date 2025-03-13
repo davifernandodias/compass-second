@@ -1,4 +1,4 @@
-const ProductReviews = () => {
+const ProductReviews = ({ Review  } : { Review : Review}) => {
   
   return (
     <div className="bg-red-500">

@@ -83,7 +83,7 @@ const PageDetail = () => {
           </div>
         </div>
         <div>
-          <ProductReviews  />
+          <ProductReviews Review={product.reviews} />
         </div>
         <div className="flex justify-center">
           <Button className="w-48 h-12 rounded-3xl cursor-pointer border border-gray-secundary font-family-satoshi-medium text-14 font-medium">

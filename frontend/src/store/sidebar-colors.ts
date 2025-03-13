@@ -1,9 +1,3 @@
-type Color = {
-  name: string
-  value: string
-  textColor: string
-  border: string
-}
 
 export const colors: Color[] = [
   { name: "Green", value: "bg-green-500", textColor: "text-white", border: "border-green-700" },

@@ -10,7 +10,7 @@ const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResp
         <div className="flex justify-center items-center p-1.5 bg-gray-secundary rounded-2xl">
           <Image
             src={`${productGroupById.products.image}`}
-            className="w-96 h-64 lg:w-120 lg:h-96"
+            className="w-96 h-64 lg:w-[500px] lg:h-[530px]"
             width={150}
             height={260}
             alt="Product Image"
@@ -26,7 +26,7 @@ const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResp
               >
                 <Image
                   src={`${productGroupById.products.image}`}
-                  className="lg:w-36 lg:h-36"
+                  className="lg:w-48 lg:h-44"
                   width={150}
                   height={260}
                   alt="Product Thumbnail"
@@ -37,7 +37,7 @@ const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResp
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col gap-4 justify-start items-start">
-          <h1 className="font-family-integral-bold font-bold text-2xl lg:text-3xl">
+          <h1 className="font-family-integral-bold font-bold text-2xl lg:text-4xl">
             Product Detail {productGroupById.products.nome}
           </h1>
 
@@ -54,23 +54,22 @@ const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResp
             </p>
           </div>
 
-          <div className="flex font-family-satoshi-medium items-center font-bold gap-2 text-20 lg:text-xl">
+          <div className="flex font-family-satoshi-medium items-center font-bold gap-2 text-20 lg:text-2xl">
             <p>${productGroupById.products.price}</p>
             {productGroupById.products.discount === 0 ? (
-            " "
+              " "
             ) : (
               <>
-            <p className="text-[#999999] line-through">
-            {Math.floor(
-        productGroupById.products.price * (1 - productGroupById.products.discount! / 100)
-      )}
-    </p>
-    <p className="h-5 px-2.5 lg:px-3 lg:h-5.5 lg:text-12 font-family-satoshi-regular flex items-center text-[#FF3333] bg-[#ffebeb] text-10 rounded-3xl">
-      -{productGroupById.products.discount}%
-    </p>
-  </>
-)}
-
+                <p className="text-[#999999] line-through">
+                  {Math.floor(
+                    productGroupById.products.price * (1 - productGroupById.products.discount! / 100)
+                  )}
+                </p>
+                <p className="h-5 px-2.5 lg:px-3 lg:h-5.5 lg:text-12 font-family-satoshi-regular flex items-center text-[#FF3333] bg-[#ffebeb] text-10 rounded-3xl">
+                  -{productGroupById.products.discount}%
+                </p>
+              </>
+            )}
           </div>
 
           <div>
@@ -85,7 +84,7 @@ const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResp
         <div>
           <SpecificSelectionDetail />
         </div>
-      </div>  
+      </div>
     </div>
   );
 };

@@ -22,14 +22,14 @@ const SpecificSelectionDetail = () => {
   };
 
   const handleAddToCart = () => {
-    toast.success("Produto adicionado ao carrinho!", {
+    toast.success("Added to cart!", {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      theme: "dark",
+      theme: "light",
     });
   };
 
@@ -39,7 +39,7 @@ const SpecificSelectionDetail = () => {
     <div className="flex flex-col gap-6">
       <ToastContainer />
       <div className="flex flex-col gap-4">
-        <p className="text-14 text-gray-text font-family-satoshi-regular font-normal mt-5">Select Colors</p>
+        <p className="text-14 text-gray-text font-family-satoshi-regular font-normal">Select Colors</p>
         <div className="flex gap-2 max-w-md">
           {colorsDetail.map((color) => (
             <button
@@ -66,7 +66,7 @@ const SpecificSelectionDetail = () => {
           {["Small", "Medium", "Large", "X-Large"].map((size) => (
             <div
               key={size}
-              className={`px-3 py-2 rounded-full cursor-pointer transition-colors font-family-satoshi-medium ${
+              className={`px-6 py-2 rounded-full cursor-pointer transition-colors font-family-satoshi-medium ${
                 selectedSize === size
                   ? "bg-black text-white"
                   : "bg-gray-100 text-black hover:bg-black hover:text-white"
@@ -83,23 +83,23 @@ const SpecificSelectionDetail = () => {
 
       <div className="flex items-center justify-start gap-3">
         <div className="flex items-center bg-gray-100 rounded-full px-3 py-2">
-          <button
+          <Button
             className="w-8 h-8 flex items-center justify-center cursor-pointer"
-            onClick={handleRemoveProductInCart}
+            onclick={handleRemoveProductInCart}
           >
             <Tally1 className="rotate-90 mt-3 text-gray-700" size={16} />
-          </button>
+          </Button>
           <span className="text-lg font-semibold px-4 font-family-satoshi-medium text-14">{quantityProductInCart}</span>
-          <button
+          <Button
             className="w-8 h-8 flex items-center justify-center cursor-pointer"
-            onClick={handleAddedProductInCart}
+            onclick={handleAddedProductInCart}
           >
             <X className="text-gray-700 -rotate-45" size={16} />
-          </button>
+          </Button>
         </div>
 
         <Button
-          className="bg-black text-white text-lg w-60 h-11 font-family-satoshi-medium text-14 rounded-full lg:text-16 lg:w-96"
+          className="bg-black text-white text-lg w-60 h-11 font-family-satoshi-medium font-medium text-14 rounded-full lg:text-16 lg:w-96"
           onclick={handleAddToCart}
         >
           Add to Cart

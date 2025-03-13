@@ -40,3 +40,27 @@ interface GetAllProductsProps {
   minPrice?: number;
   maxPrice?: number;
 }
+
+
+type Color = {
+  name: string
+  value: string
+  textColor: string
+  border: string
+}
+
+interface FilterState {
+  initialPage: number;
+  finalLimit: number;
+  minPrice: number;
+  maxPrice: number;
+  color: string;
+  size: string;
+  currentPage: number;
+}
+
+
+interface FilterActions {
+  setValue: (field: keyof FilterState, value: string | number) => void;
+  reset: () => void;
+}
