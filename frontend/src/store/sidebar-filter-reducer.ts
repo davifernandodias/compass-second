@@ -1,11 +1,5 @@
 import { create } from "zustand";
 
-
-interface FilterActions {
-  setValue: (field: keyof FilterState, value: string | number) => void;
-  reset: () => void;
-}
-
 export const useFilterStore = create<FilterState & FilterActions>((set) => ({
   initialPage: 0,
   finalLimit: 75,

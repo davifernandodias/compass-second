@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { colorsDetail } from "@/store/sidebar-colors";
+import { colorsDetail } from "@/utils/sidebar-colors";
 
 const SpecificSelectionDetail = () => {
   const [quantityProductInCart, setQuantityProductInCart] = useState(1);
@@ -45,9 +45,8 @@ const SpecificSelectionDetail = () => {
             <button
               key={color.hex}
               type="button"
-              className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                selectedColor === color.hex ? "" : ""
-              }`}
+              className={`w-10 h-10 rounded-full flex items-center justify-center ${selectedColor === color.hex ? "" : ""
+                }`}
               style={{ backgroundColor: color.hex }}
               onClick={() => setSelectedColor(color.hex)}
               aria-label={`Select ${color.name} color`}
@@ -66,11 +65,10 @@ const SpecificSelectionDetail = () => {
           {["Small", "Medium", "Large", "X-Large"].map((size) => (
             <div
               key={size}
-              className={`px-6 py-2 rounded-full cursor-pointer transition-colors font-family-satoshi-medium ${
-                selectedSize === size
+              className={`px-6 py-2 rounded-full cursor-pointer transition-colors font-family-satoshi-medium ${selectedSize === size
                   ? "bg-black text-white"
                   : "bg-gray-100 text-black hover:bg-black hover:text-white"
-              }`}
+                }`}
               onClick={() => setSelectedSize(size)}
             >
               {size}

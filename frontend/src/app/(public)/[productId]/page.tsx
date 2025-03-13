@@ -1,10 +1,10 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import ProductDetail from "@/container/product-detail"
-import ProductReviews from "@/container/product-reviews"
+import ProductDetail from "@/container/product/product-detail"
+import ProductReviews from "@/container/product/product-reviews"
 import IconCollapse from "@public/svg/clothes/icon-collapse"
 import IconFilterMobile from "@public/svg/clothes/icon-filter-mobile"
-import ProductDetailCarrosel from "@/container/product-detail-carrosel"
+import ProductDetailCarrosel from "@/container/product/product-detail-carrosel"
 import { useParams } from "next/navigation"
 import { getAllProducts, getByIdProduct } from "@/services/products"
 import { useEffect, useState } from "react"
@@ -31,15 +31,14 @@ const PageDetail = () => {
     };
     handleFetchData();
   }, [params.productId]);
-
+  
   if (loading) {
     return <div>Carregando...</div>;
   }
-
+  
   if (!product) {
     return <div>Produto não encontrado</div>;
   }
-
   return (
     <section className="flex flex-col gap-10 bg-white">
       <nav className="flex gap-2 bg-white items-center pl-4 lg:pl-16">
@@ -56,14 +55,14 @@ const PageDetail = () => {
       </div>
       <div className="flex flex-col justify-center items-center font-family-satoshi-regular font-normal">
         <div className="flex w-full justify-around">
-          <p className="py-3">Product Details</p>
-          <p className="py-3 border-b-black border-b-2 lg:w-64 text-center font-medium">Rating & Reviews</p>
-          <p className="py-3">FAQs</p>
+          <p className="py-3 lg:text-20 text-gray-text">Product Details</p>
+          <p className="py-3 border-b-black border-b-2 lg:w-64 text-center font-medium lg:text-20">Rating & Reviews</p>
+          <p className="py-3 lg:text-20 text-gray-text">FAQs</p>
         </div>
         <div className="h-px w-[90%] bg-gray-200" />
       </div>
       <div className="flex flex-col gap-10 p-4">
-        <div className="flex gap-4 items-center justify-between">
+        <div className="flex gap-4 lg:px-14 items-center -mt-8 justify-between">
           <div className="font-family-satoshi-medium">
             <h1 className="text-20 font-bold">
               All Reviews <span className="text-gray-text text-14 font-normal">(451)</span>
@@ -83,7 +82,7 @@ const PageDetail = () => {
           </div>
         </div>
         <div>
-          <ProductReviews Review={product.reviews} />
+          <ProductReviews productGroup={product} />
         </div>
         <div className="flex justify-center">
           <Button className="w-48 h-12 rounded-3xl cursor-pointer border border-gray-secundary font-family-satoshi-medium text-14 font-medium">

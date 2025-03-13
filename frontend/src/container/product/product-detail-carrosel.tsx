@@ -1,5 +1,5 @@
 "use client"
-import { settings } from "@/store/product-detail-carrosel"
+import { settings } from "@/utils/product-detail-carrosel"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"

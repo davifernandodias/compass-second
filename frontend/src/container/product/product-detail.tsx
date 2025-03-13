@@ -1,7 +1,7 @@
 import IconHalfStar from "@public/svg/clothes/icon-half-star";
 import IconStars from "@public/svg/clothes/icon-stars";
 import Image from "next/image";
-import SpecificSelectionDetail from "./specific-selection-detail";
+import SpecificSelectionDetail from "@container/specific-selection-detail";
 
 const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResponse }) => {
   return (
@@ -54,14 +54,14 @@ const ProductDetail = ({ productGroupById }: { productGroupById: GetProductsResp
             </p>
           </div>
 
-          <div className="flex font-family-satoshi-medium items-center font-bold gap-2 text-20 lg:text-2xl">
+          <div className="flex font-family-satoshi-medium items-center font-bold gap-2 text-20 lg:text-3xl">
             <p>${productGroupById.products.price}</p>
             {productGroupById.products.discount === 0 ? (
               " "
             ) : (
               <>
                 <p className="text-[#999999] line-through">
-                  {Math.floor(
+                  ${Math.floor(
                     productGroupById.products.price * (1 - productGroupById.products.discount! / 100)
                   )}
                 </p>

@@ -22,6 +22,7 @@
       "@/*": ["./src/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@public/*": ["./public/*"],
+      "@container/*": ["./src/container/*"],
       "@mock/*": ["./mock/*"],
     }
   },
