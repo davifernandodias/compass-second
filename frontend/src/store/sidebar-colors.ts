@@ -17,3 +17,9 @@ export const colors: Color[] = [
   { name: "White", value: "bg-white", textColor: "text-black", border: "border-gray-300" },
   { name: "Black", value: "bg-black", textColor: "text-white", border: "border-gray-900" },
 ]
+
+export const colorsDetail = [
+  { hex: "#4f4631", name: "Brown" },
+  { hex: "#314f4a", name: "Green" },
+  { hex: "#31344f", name: "Navy" },
+];

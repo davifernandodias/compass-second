@@ -9,12 +9,12 @@ import IconHalfStar from "@public/svg/clothes/icon-half-star"
 import Link from "next/link"
 
 
-const ProductDetailCarrosel = ({ products }: { products: GetProductsReponse[] }) => {
+const ProductDetailCarrosel = ({ products }: { products: GetProductsResponse[] }) => {
   return (
     <Slider {...settings}>
       {products.map((productGroup, index) => (
-        <Link href={`${productGroup.products.id}`}>
-          <div key={index} className="px-2 rounded-2xl">
+        <Link href={`/${productGroup.products.id}`} key={index}>
+          <div className="px-2 rounded-2xl">
             <div className="flex flex-col items-center rounded-2xl">
               <Image
                 src={productGroup.products.image || "/fallback-image.jpg"}
@@ -66,7 +66,7 @@ const ProductDetailCarrosel = ({ products }: { products: GetProductsReponse[] })
         </Link>
       ))}
     </Slider>
-  )
-}
+  );
+};
 
-export default ProductDetailCarrosel
+export default ProductDetailCarrosel;

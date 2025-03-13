@@ -39,3 +39,23 @@ export const getAllProducts = async ({ initial, finalLimit, color, size, minPric
     return error;
   }
 };
+
+export const getByIdProduct = async (id: number) => {
+
+  try {
+
+    const response = await fetch(`${URL_API_BACKEND}/products/${id}`);
+
+    if(!response.ok){
+      throw new Error(`Erro na requisição: ${response.status}`);
+    }
+
+    return await response.json();
+
+  }catch(error) {
+    console.error("Error ao buscar o produto por id:", error);
+    return error
+  }
+
+}
+

@@ -4,7 +4,7 @@ import IconStars from "@public/svg/clothes/icon-stars";
 import Image from "next/image";
 import Link from "next/link";
 
-export const Product = ({ products }: { products: GetProductsReponse[] }) => {
+export const Product = ({ products }: { products: GetProductsResponse[] }) => {
   if (!products?.length) return null;
 
   const truncateText = (text: string, maxLength: number) => {
