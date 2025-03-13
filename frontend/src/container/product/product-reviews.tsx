@@ -39,15 +39,17 @@ const ProductReviews = ({ productGroup }: { productGroup: GetProductsResponse })
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-2 items-center">
                     <p className="font-family-satoshi-medium font-bold text-16">{review.name}</p>
-                    <IconVerifyReviews className="w-4 h-4"/>
+                    <IconVerifyReviews className="w-4 h-4" />
                   </div>
                   <div>
                     <p className="font-family-satoshi-medium text-gray-text text-14 font-normal">
-                      "{review.comment}"
+                      &quot;{review.comment}&quot;
                     </p>
                   </div>
                   <div>
-                    <p className="font-family-satoshi-medium font-medium text-gray-text text-14 -mb-3">Posted on {formattedDate}</p>
+                    <p className="font-family-satoshi-medium font-medium text-gray-text text-14 -mb-3">
+                      Posted on {formattedDate}
+                    </p>
                   </div>
                 </div>
               </div>
