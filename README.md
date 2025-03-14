@@ -1,4 +1,4 @@
-# Project Name
+
 
 Yo, welcome! This is a chill full-stack project rocking a **Next.js** frontend and an **Express.js** backend.
 
